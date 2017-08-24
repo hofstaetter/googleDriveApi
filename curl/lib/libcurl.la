@@ -5,19 +5,19 @@
 # It is necessary for linking the library.
 
 # The name that we can dlopen(3).
-dlname='libcurl.4.dylib'
+dlname='libcurl.so.4'
 
 # Names of this library.
-library_names='libcurl.4.dylib libcurl.dylib'
+library_names='libcurl.so.4.4.0 libcurl.so.4 libcurl.so'
 
 # The name of the static archive.
 old_library='libcurl.a'
 
 # Linker flags that cannot go in dependency_libs.
-inherited_linker_flags='  -framework CoreFoundation -framework Security'
+inherited_linker_flags=' -pthread'
 
 # Libraries that this one depends upon.
-dependency_libs=' -lldap -lz'
+dependency_libs=''
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''

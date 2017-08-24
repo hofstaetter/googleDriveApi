@@ -57,7 +57,7 @@ googleDriveApi::request(string host, string path, string type, map<string, strin
 
     //get http status code
     long statuscode = 0;
-    curl_easy_setopt(req, CURLINFO_RESPONSE_CODE, &statuscode);
+    //curl_easy_setopt(req, CURLINFO_RESPONSE_CODE, &statuscode);
 
     //set headers
     struct curl_slist *headers=NULL;
@@ -92,10 +92,9 @@ googleDriveApi::list(string corpora, string corpus, bool includeTeamDriveItems, 
     map<string, string> querystring = { make_pair("corpora", corpora), /*make_pair("corpus", corpus),*/ /*make_pair("includeTeamDriveItems", includeTeamDriveItems ? "true" : "false"),*/ make_pair("orderBy", orderBy),
                                   make_pair("pageSize", to_string(pageSize)), make_pair("pageToken", pageToken), make_pair("q", q), make_pair("spaces", spaces), make_pair("supportsTeamDrives", supportsTeamDrives ? "true" : "false"), /*make_pair("teamDriveId", teamDriveId),*/ make_pair("alt", alt  ? "" : "json"),
                                   make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
-    vector<string> headers =
+    map<string, string> headers = { make_pair("Authorization", "Bearer ya29.GluuBKMPpAhDjpugsB2Ysn4WXeyEjIREg92O0J3lENu1o3LdGIO1OsErErr-QicIBrua_D2AvkBYQBeyc9g5_lzh_-VCIxl___NKTiXReiUc2Ewwjf2N2t48hxUZ") };
     long responseCode = googleDriveApi::request("www.googleapis.com", "/drive/v3/files", "GET", querystring,
-                                                { "Authorization: Bearer ya29.GluuBKMPpAhDjpugsB2Ysn4WXeyEjIREg92O0J3lENu1o3LdGIO1OsErErr-QicIBrua_D2AvkBYQBeyc9g5_lzh_-VCIxl___NKTiXReiUc2Ewwjf2N2t48hxUZ" },
-                                                {}, "", response);
+                                                headers, {}, "", response);
 
     if(responseCode == 403) { throw response; }
 
@@ -184,10 +183,10 @@ googleDriveApi::watch(string fileId, bool acknowledgeAbuse, bool supportsTeamDri
     return watchResponse();
 }
 
-bool googleDriveApi::auth(string authCode, string clientId, string clientSecret, string redirectUri, string grantType) {
+bool googleDriveApi::getAuthCode(string authCode, string clientId, string clientSecret, string redirectUri, string grantType) {
     rapidjson::Document document;
     long httpCode = googleDriveApi::request("accounts.google.com", "/o/oauth2/v2/auth", "POST", { make_pair("response_type", "code"), make_pair("client_id", "590194775230-snrhmjb562msv07a5rvg8mj6l5tiiq0i.apps.googleusercontent.com"), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("scope", "https://www.googleapis.com/auth/drive") },
-                                            { "content-type: application/x-www-form-urlencoded" },
+                                            { make_pair("content-type", "application/x-www-form-urlencoded") },
                                             {}, //{ make_pair("code", authCode), make_pair("client_id", clientId), make_pair("client_secret", clientSecret), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("grant_type", "authorization_code") },
                                             "", document);
 

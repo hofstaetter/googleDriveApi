@@ -129,8 +129,8 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-build_triplet = x86_64-apple-darwin16.7.0
-host_triplet = x86_64-apple-darwin16.7.0
+build_triplet = x86_64-pc-linux-gnu
+host_triplet = x86_64-pc-linux-gnu
 #am__append_1 = -DCURL_STATICLIB
 check_PROGRAMS = 10-at-a-time$(EXEEXT) anyauthput$(EXEEXT) \
 	cookie_interface$(EXEEXT) debug$(EXEEXT) fileupload$(EXEEXT) \
@@ -190,10 +190,10 @@ CONFIG_CLEAN_VPATH_FILES =
 10_at_a_time_SOURCES = 10-at-a-time.c
 10_at_a_time_OBJECTS = 10-at-a-time.$(OBJEXT)
 10_at_a_time_LDADD = $(LDADD)
-#10_at_a_time_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 10_at_a_time_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#10_at_a_time_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 AM_V_lt = $(am__v_lt_$(V))
 am__v_lt_ = $(am__v_lt_$(AM_DEFAULT_VERBOSITY))
 am__v_lt_0 = --silent
@@ -201,516 +201,516 @@ am__v_lt_1 =
 anyauthput_SOURCES = anyauthput.c
 anyauthput_OBJECTS = anyauthput.$(OBJEXT)
 anyauthput_LDADD = $(LDADD)
-#anyauthput_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 anyauthput_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#anyauthput_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 certinfo_SOURCES = certinfo.c
 certinfo_OBJECTS = certinfo.$(OBJEXT)
 certinfo_LDADD = $(LDADD)
-#certinfo_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 certinfo_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#certinfo_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 chkspeed_SOURCES = chkspeed.c
 chkspeed_OBJECTS = chkspeed.$(OBJEXT)
 chkspeed_LDADD = $(LDADD)
-#chkspeed_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 chkspeed_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#chkspeed_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 cookie_interface_SOURCES = cookie_interface.c
 cookie_interface_OBJECTS = cookie_interface.$(OBJEXT)
 cookie_interface_LDADD = $(LDADD)
-#cookie_interface_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 cookie_interface_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#cookie_interface_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 debug_SOURCES = debug.c
 debug_OBJECTS = debug.$(OBJEXT)
 debug_LDADD = $(LDADD)
-#debug_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
-debug_DEPENDENCIES = $(LIBDIR)/libcurl.la
+debug_DEPENDENCIES =  \
+	$(LIBDIR)/libcurl.la
+#debug_DEPENDENCIES = $(LIBDIR)/libcurl.la
 externalsocket_SOURCES = externalsocket.c
 externalsocket_OBJECTS = externalsocket.$(OBJEXT)
 externalsocket_LDADD = $(LDADD)
-#externalsocket_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 externalsocket_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#externalsocket_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 fileupload_SOURCES = fileupload.c
 fileupload_OBJECTS = fileupload.$(OBJEXT)
 fileupload_LDADD = $(LDADD)
-#fileupload_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 fileupload_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#fileupload_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 fopen_SOURCES = fopen.c
 fopen_OBJECTS = fopen.$(OBJEXT)
 fopen_LDADD = $(LDADD)
-#fopen_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
-fopen_DEPENDENCIES = $(LIBDIR)/libcurl.la
+fopen_DEPENDENCIES =  \
+	$(LIBDIR)/libcurl.la
+#fopen_DEPENDENCIES = $(LIBDIR)/libcurl.la
 ftp_wildcard_SOURCES = ftp-wildcard.c
 ftp_wildcard_OBJECTS = ftp-wildcard.$(OBJEXT)
 ftp_wildcard_LDADD = $(LDADD)
-#ftp_wildcard_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftp_wildcard_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftp_wildcard_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 ftpget_SOURCES = ftpget.c
 ftpget_OBJECTS = ftpget.$(OBJEXT)
 ftpget_LDADD = $(LDADD)
-#ftpget_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftpget_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftpget_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 ftpgetinfo_SOURCES = ftpgetinfo.c
 ftpgetinfo_OBJECTS = ftpgetinfo.$(OBJEXT)
 ftpgetinfo_LDADD = $(LDADD)
-#ftpgetinfo_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftpgetinfo_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftpgetinfo_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 ftpgetresp_SOURCES = ftpgetresp.c
 ftpgetresp_OBJECTS = ftpgetresp.$(OBJEXT)
 ftpgetresp_LDADD = $(LDADD)
-#ftpgetresp_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftpgetresp_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftpgetresp_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 ftpsget_SOURCES = ftpsget.c
 ftpsget_OBJECTS = ftpsget.$(OBJEXT)
 ftpsget_LDADD = $(LDADD)
-#ftpsget_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftpsget_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftpsget_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 ftpupload_SOURCES = ftpupload.c
 ftpupload_OBJECTS = ftpupload.$(OBJEXT)
 ftpupload_LDADD = $(LDADD)
-#ftpupload_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftpupload_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftpupload_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 ftpuploadfrommem_SOURCES = ftpuploadfrommem.c
 ftpuploadfrommem_OBJECTS = ftpuploadfrommem.$(OBJEXT)
 ftpuploadfrommem_LDADD = $(LDADD)
-#ftpuploadfrommem_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 ftpuploadfrommem_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#ftpuploadfrommem_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 getinfo_SOURCES = getinfo.c
 getinfo_OBJECTS = getinfo.$(OBJEXT)
 getinfo_LDADD = $(LDADD)
-#getinfo_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 getinfo_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#getinfo_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 getinmemory_SOURCES = getinmemory.c
 getinmemory_OBJECTS = getinmemory.$(OBJEXT)
 getinmemory_LDADD = $(LDADD)
-#getinmemory_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 getinmemory_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#getinmemory_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 getredirect_SOURCES = getredirect.c
 getredirect_OBJECTS = getredirect.$(OBJEXT)
 getredirect_LDADD = $(LDADD)
-#getredirect_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 getredirect_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#getredirect_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 http_post_SOURCES = http-post.c
 http_post_OBJECTS = http-post.$(OBJEXT)
 http_post_LDADD = $(LDADD)
-#http_post_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 http_post_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#http_post_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 http2_download_SOURCES = http2-download.c
 http2_download_OBJECTS = http2-download.$(OBJEXT)
 http2_download_LDADD = $(LDADD)
-#http2_download_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 http2_download_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#http2_download_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 http2_serverpush_SOURCES = http2-serverpush.c
 http2_serverpush_OBJECTS = http2-serverpush.$(OBJEXT)
 http2_serverpush_LDADD = $(LDADD)
-#http2_serverpush_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 http2_serverpush_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#http2_serverpush_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 http2_upload_SOURCES = http2-upload.c
 http2_upload_OBJECTS = http2-upload.$(OBJEXT)
 http2_upload_LDADD = $(LDADD)
-#http2_upload_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 http2_upload_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#http2_upload_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 httpcustomheader_SOURCES = httpcustomheader.c
 httpcustomheader_OBJECTS = httpcustomheader.$(OBJEXT)
 httpcustomheader_LDADD = $(LDADD)
-#httpcustomheader_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 httpcustomheader_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#httpcustomheader_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 httpput_SOURCES = httpput.c
 httpput_OBJECTS = httpput.$(OBJEXT)
 httpput_LDADD = $(LDADD)
-#httpput_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 httpput_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#httpput_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 https_SOURCES = https.c
 https_OBJECTS = https.$(OBJEXT)
 https_LDADD = $(LDADD)
-#https_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
-https_DEPENDENCIES = $(LIBDIR)/libcurl.la
+https_DEPENDENCIES =  \
+	$(LIBDIR)/libcurl.la
+#https_DEPENDENCIES = $(LIBDIR)/libcurl.la
 imap_append_SOURCES = imap-append.c
 imap_append_OBJECTS = imap-append.$(OBJEXT)
 imap_append_LDADD = $(LDADD)
-#imap_append_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_append_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_append_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_copy_SOURCES = imap-copy.c
 imap_copy_OBJECTS = imap-copy.$(OBJEXT)
 imap_copy_LDADD = $(LDADD)
-#imap_copy_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_copy_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_copy_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_create_SOURCES = imap-create.c
 imap_create_OBJECTS = imap-create.$(OBJEXT)
 imap_create_LDADD = $(LDADD)
-#imap_create_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_create_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_create_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_delete_SOURCES = imap-delete.c
 imap_delete_OBJECTS = imap-delete.$(OBJEXT)
 imap_delete_LDADD = $(LDADD)
-#imap_delete_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_delete_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_delete_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_examine_SOURCES = imap-examine.c
 imap_examine_OBJECTS = imap-examine.$(OBJEXT)
 imap_examine_LDADD = $(LDADD)
-#imap_examine_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_examine_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_examine_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_fetch_SOURCES = imap-fetch.c
 imap_fetch_OBJECTS = imap-fetch.$(OBJEXT)
 imap_fetch_LDADD = $(LDADD)
-#imap_fetch_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_fetch_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_fetch_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_list_SOURCES = imap-list.c
 imap_list_OBJECTS = imap-list.$(OBJEXT)
 imap_list_LDADD = $(LDADD)
-#imap_list_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_list_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_list_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_lsub_SOURCES = imap-lsub.c
 imap_lsub_OBJECTS = imap-lsub.$(OBJEXT)
 imap_lsub_LDADD = $(LDADD)
-#imap_lsub_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_lsub_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_lsub_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_multi_SOURCES = imap-multi.c
 imap_multi_OBJECTS = imap-multi.$(OBJEXT)
 imap_multi_LDADD = $(LDADD)
-#imap_multi_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_multi_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_multi_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_noop_SOURCES = imap-noop.c
 imap_noop_OBJECTS = imap-noop.$(OBJEXT)
 imap_noop_LDADD = $(LDADD)
-#imap_noop_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_noop_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_noop_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_search_SOURCES = imap-search.c
 imap_search_OBJECTS = imap-search.$(OBJEXT)
 imap_search_LDADD = $(LDADD)
-#imap_search_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_search_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_search_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_ssl_SOURCES = imap-ssl.c
 imap_ssl_OBJECTS = imap-ssl.$(OBJEXT)
 imap_ssl_LDADD = $(LDADD)
-#imap_ssl_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_ssl_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_ssl_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_store_SOURCES = imap-store.c
 imap_store_OBJECTS = imap-store.$(OBJEXT)
 imap_store_LDADD = $(LDADD)
-#imap_store_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_store_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_store_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 imap_tls_SOURCES = imap-tls.c
 imap_tls_OBJECTS = imap-tls.$(OBJEXT)
 imap_tls_LDADD = $(LDADD)
-#imap_tls_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 imap_tls_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#imap_tls_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 multi_app_SOURCES = multi-app.c
 multi_app_OBJECTS = multi-app.$(OBJEXT)
 multi_app_LDADD = $(LDADD)
-#multi_app_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 multi_app_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#multi_app_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 multi_debugcallback_SOURCES = multi-debugcallback.c
 multi_debugcallback_OBJECTS = multi-debugcallback.$(OBJEXT)
 multi_debugcallback_LDADD = $(LDADD)
-#multi_debugcallback_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 multi_debugcallback_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#multi_debugcallback_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 multi_double_SOURCES = multi-double.c
 multi_double_OBJECTS = multi-double.$(OBJEXT)
 multi_double_LDADD = $(LDADD)
-#multi_double_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 multi_double_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#multi_double_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 multi_post_SOURCES = multi-post.c
 multi_post_OBJECTS = multi-post.$(OBJEXT)
 multi_post_LDADD = $(LDADD)
-#multi_post_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 multi_post_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#multi_post_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 multi_single_SOURCES = multi-single.c
 multi_single_OBJECTS = multi-single.$(OBJEXT)
 multi_single_LDADD = $(LDADD)
-#multi_single_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 multi_single_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#multi_single_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 persistant_SOURCES = persistant.c
 persistant_OBJECTS = persistant.$(OBJEXT)
 persistant_LDADD = $(LDADD)
-#persistant_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 persistant_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#persistant_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_dele_SOURCES = pop3-dele.c
 pop3_dele_OBJECTS = pop3-dele.$(OBJEXT)
 pop3_dele_LDADD = $(LDADD)
-#pop3_dele_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_dele_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_dele_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_list_SOURCES = pop3-list.c
 pop3_list_OBJECTS = pop3-list.$(OBJEXT)
 pop3_list_LDADD = $(LDADD)
-#pop3_list_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_list_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_list_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_multi_SOURCES = pop3-multi.c
 pop3_multi_OBJECTS = pop3-multi.$(OBJEXT)
 pop3_multi_LDADD = $(LDADD)
-#pop3_multi_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_multi_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_multi_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_noop_SOURCES = pop3-noop.c
 pop3_noop_OBJECTS = pop3-noop.$(OBJEXT)
 pop3_noop_LDADD = $(LDADD)
-#pop3_noop_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_noop_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_noop_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_retr_SOURCES = pop3-retr.c
 pop3_retr_OBJECTS = pop3-retr.$(OBJEXT)
 pop3_retr_LDADD = $(LDADD)
-#pop3_retr_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_retr_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_retr_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_ssl_SOURCES = pop3-ssl.c
 pop3_ssl_OBJECTS = pop3-ssl.$(OBJEXT)
 pop3_ssl_LDADD = $(LDADD)
-#pop3_ssl_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_ssl_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_ssl_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_stat_SOURCES = pop3-stat.c
 pop3_stat_OBJECTS = pop3-stat.$(OBJEXT)
 pop3_stat_LDADD = $(LDADD)
-#pop3_stat_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_stat_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_stat_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_tls_SOURCES = pop3-tls.c
 pop3_tls_OBJECTS = pop3-tls.$(OBJEXT)
 pop3_tls_LDADD = $(LDADD)
-#pop3_tls_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_tls_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_tls_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_top_SOURCES = pop3-top.c
 pop3_top_OBJECTS = pop3-top.$(OBJEXT)
 pop3_top_LDADD = $(LDADD)
-#pop3_top_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_top_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_top_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 pop3_uidl_SOURCES = pop3-uidl.c
 pop3_uidl_OBJECTS = pop3-uidl.$(OBJEXT)
 pop3_uidl_LDADD = $(LDADD)
-#pop3_uidl_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 pop3_uidl_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#pop3_uidl_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 post_callback_SOURCES = post-callback.c
 post_callback_OBJECTS = post-callback.$(OBJEXT)
 post_callback_LDADD = $(LDADD)
-#post_callback_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 post_callback_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#post_callback_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 postinmemory_SOURCES = postinmemory.c
 postinmemory_OBJECTS = postinmemory.$(OBJEXT)
 postinmemory_LDADD = $(LDADD)
-#postinmemory_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 postinmemory_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#postinmemory_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 postit2_SOURCES = postit2.c
 postit2_OBJECTS = postit2.$(OBJEXT)
 postit2_LDADD = $(LDADD)
-#postit2_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 postit2_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#postit2_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 progressfunc_SOURCES = progressfunc.c
 progressfunc_OBJECTS = progressfunc.$(OBJEXT)
 progressfunc_LDADD = $(LDADD)
-#progressfunc_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 progressfunc_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#progressfunc_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 resolve_SOURCES = resolve.c
 resolve_OBJECTS = resolve.$(OBJEXT)
 resolve_LDADD = $(LDADD)
-#resolve_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 resolve_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#resolve_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 rtsp_SOURCES = rtsp.c
 rtsp_OBJECTS = rtsp.$(OBJEXT)
 rtsp_LDADD = $(LDADD)
-#rtsp_DEPENDENCIES = $(LIBDIR)/libcurl.la
 rtsp_DEPENDENCIES = $(LIBDIR)/libcurl.la
+#rtsp_DEPENDENCIES = $(LIBDIR)/libcurl.la
 sendrecv_SOURCES = sendrecv.c
 sendrecv_OBJECTS = sendrecv.$(OBJEXT)
 sendrecv_LDADD = $(LDADD)
-#sendrecv_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 sendrecv_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#sendrecv_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 sepheaders_SOURCES = sepheaders.c
 sepheaders_OBJECTS = sepheaders.$(OBJEXT)
 sepheaders_LDADD = $(LDADD)
-#sepheaders_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 sepheaders_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#sepheaders_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 sftpget_SOURCES = sftpget.c
 sftpget_OBJECTS = sftpget.$(OBJEXT)
 sftpget_LDADD = $(LDADD)
-#sftpget_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 sftpget_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#sftpget_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 simple_SOURCES = simple.c
 simple_OBJECTS = simple.$(OBJEXT)
 simple_LDADD = $(LDADD)
-#simple_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 simple_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#simple_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 simplepost_SOURCES = simplepost.c
 simplepost_OBJECTS = simplepost.$(OBJEXT)
 simplepost_LDADD = $(LDADD)
-#simplepost_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 simplepost_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#simplepost_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 simplessl_SOURCES = simplessl.c
 simplessl_OBJECTS = simplessl.$(OBJEXT)
 simplessl_LDADD = $(LDADD)
-#simplessl_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 simplessl_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#simplessl_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 smtp_expn_SOURCES = smtp-expn.c
 smtp_expn_OBJECTS = smtp-expn.$(OBJEXT)
 smtp_expn_LDADD = $(LDADD)
-#smtp_expn_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 smtp_expn_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#smtp_expn_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 smtp_mail_SOURCES = smtp-mail.c
 smtp_mail_OBJECTS = smtp-mail.$(OBJEXT)
 smtp_mail_LDADD = $(LDADD)
-#smtp_mail_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 smtp_mail_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#smtp_mail_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 smtp_multi_SOURCES = smtp-multi.c
 smtp_multi_OBJECTS = smtp-multi.$(OBJEXT)
 smtp_multi_LDADD = $(LDADD)
-#smtp_multi_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 smtp_multi_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#smtp_multi_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 smtp_ssl_SOURCES = smtp-ssl.c
 smtp_ssl_OBJECTS = smtp-ssl.$(OBJEXT)
 smtp_ssl_LDADD = $(LDADD)
-#smtp_ssl_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 smtp_ssl_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#smtp_ssl_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 smtp_tls_SOURCES = smtp-tls.c
 smtp_tls_OBJECTS = smtp-tls.$(OBJEXT)
 smtp_tls_LDADD = $(LDADD)
-#smtp_tls_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 smtp_tls_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#smtp_tls_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 smtp_vrfy_SOURCES = smtp-vrfy.c
 smtp_vrfy_OBJECTS = smtp-vrfy.$(OBJEXT)
 smtp_vrfy_LDADD = $(LDADD)
-#smtp_vrfy_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 smtp_vrfy_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#smtp_vrfy_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 url2file_SOURCES = url2file.c
 url2file_OBJECTS = url2file.$(OBJEXT)
 url2file_LDADD = $(LDADD)
-#url2file_DEPENDENCIES =  \
-#	$(LIBDIR)/libcurl.la
 url2file_DEPENDENCIES =  \
 	$(LIBDIR)/libcurl.la
+#url2file_DEPENDENCIES =  \
+#	$(LIBDIR)/libcurl.la
 AM_V_P = $(am__v_P_$(V))
 am__v_P_ = $(am__v_P_$(AM_DEFAULT_VERBOSITY))
 am__v_P_0 = false
@@ -806,19 +806,19 @@ CTAGS = ctags
 am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/Makefile.inc \
 	$(top_srcdir)/depcomp README
 DISTFILES = $(DIST_COMMON) $(DIST_SOURCES) $(TEXINFOS) $(EXTRA_DIST)
-ACLOCAL = ${SHELL} /Users/matthias/Documents/Projects/googleDriveApi/curl/missing aclocal-1.15
+ACLOCAL = ${SHELL} /home/matthias/CLionProjects/googleDriveApi/curl/missing aclocal-1.15
 AMTAR = $${TAR-tar}
 AM_DEFAULT_VERBOSITY = 0
 AR = /usr/bin/ar
 AS = as
-AUTOCONF = ${SHELL} /Users/matthias/Documents/Projects/googleDriveApi/curl/missing autoconf
-AUTOHEADER = ${SHELL} /Users/matthias/Documents/Projects/googleDriveApi/curl/missing autoheader
-AUTOMAKE = ${SHELL} /Users/matthias/Documents/Projects/googleDriveApi/curl/missing automake-1.15
-AWK = awk
+AUTOCONF = ${SHELL} /home/matthias/CLionProjects/googleDriveApi/curl/missing autoconf
+AUTOHEADER = ${SHELL} /home/matthias/CLionProjects/googleDriveApi/curl/missing autoheader
+AUTOMAKE = ${SHELL} /home/matthias/CLionProjects/googleDriveApi/curl/missing automake-1.15
+AWK = gawk
 BLANK_AT_MAKETIME = 
 CC = gcc
 CCDEPMODE = depmode=gcc3
-CFLAGS = -Qunused-arguments -Os -mmacosx-version-min=10.8 -Werror=partial-availability
+CFLAGS = -Werror-implicit-function-declaration -O2 -Wno-system-headers -pthread
 CFLAG_CURL_SYMBOL_HIDING = -fvisibility=hidden
 CODE_COVERAGE_CFLAGS = 
 CODE_COVERAGE_CPPFLAGS = 
@@ -826,12 +826,12 @@ CODE_COVERAGE_CXXFLAGS =
 CODE_COVERAGE_ENABLED = no
 CODE_COVERAGE_LDFLAGS = 
 CODE_COVERAGE_LIBS = 
-CONFIGURE_OPTIONS = " '--with-darwinssl' '--with-libcurl_libraries'"
+CONFIGURE_OPTIONS = " '--with-ssl'"
 CPP = gcc -E
 CPPFLAGS = 
 CPPFLAG_CURL_STATICLIB = 
 CURLVERSION = 7.55.1
-CURL_CA_BUNDLE = "/etc/ssl/cert.pem"
+CURL_CA_BUNDLE = "/etc/pki/tls/certs/ca-bundle.crt"
 CURL_CFLAG_EXTRAS = 
 CURL_DISABLE_DICT = 
 CURL_DISABLE_FILE = 
@@ -839,8 +839,8 @@ CURL_DISABLE_FTP =
 CURL_DISABLE_GOPHER = 
 CURL_DISABLE_HTTP = 
 CURL_DISABLE_IMAP = 
-CURL_DISABLE_LDAP = 
-CURL_DISABLE_LDAPS = 
+CURL_DISABLE_LDAP = 1
+CURL_DISABLE_LDAPS = 1
 CURL_DISABLE_POP3 = 
 CURL_DISABLE_PROXY = 
 CURL_DISABLE_RTSP = 
@@ -855,10 +855,10 @@ CYGPATH_W = echo
 DEFS = -DHAVE_CONFIG_H
 DEPDIR = .deps
 DLLTOOL = false
-DSYMUTIL = dsymutil
+DSYMUTIL = 
 DUMPBIN = 
-ECHO_C = \c
-ECHO_N = 
+ECHO_C = 
+ECHO_N = -n
 ECHO_T = 
 EGREP = /usr/bin/grep -E
 ENABLE_SHARED = yes
@@ -870,7 +870,7 @@ GENHTML =
 GREP = /usr/bin/grep
 HAVE_GNUTLS_SRP = 
 HAVE_LDAP_SSL = 1
-HAVE_LIBZ = 1
+HAVE_LIBZ = 
 HAVE_OPENSSL_SRP = 
 IDN_ENABLED = 
 INSTALL = /usr/bin/install -c
@@ -880,9 +880,9 @@ INSTALL_SCRIPT = ${INSTALL}
 INSTALL_STRIP_PROGRAM = $(install_sh) -c -s
 IPV6_ENABLED = 1
 LCOV = 
-LD = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld
-LDFLAGS = -framework CoreFoundation -framework Security
-LIBCURL_LIBS = -lldap -lz
+LD = /usr/bin/ld -m elf_x86_64
+LDFLAGS = 
+LIBCURL_LIBS = 
 LIBMETALINK_CPPFLAGS = 
 LIBMETALINK_LDFLAGS = 
 LIBMETALINK_LIBS = 
@@ -891,23 +891,23 @@ LIBOBJS =
 # Prevent LIBS from being used for all link targets
 LIBS = $(BLANK_AT_MAKETIME)
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
-LIPO = lipo
+LIPO = 
 LN_S = ln -s
 LTLIBOBJS = 
 LT_SYS_LIBRARY_PATH = 
 MAINT = #
-MAKEINFO = ${SHELL} /Users/matthias/Documents/Projects/googleDriveApi/curl/missing makeinfo
+MAKEINFO = ${SHELL} /home/matthias/CLionProjects/googleDriveApi/curl/missing makeinfo
 MANIFEST_TOOL = :
 MANOPT = -man
-MKDIR_P = ../.././install-sh -c -d
+MKDIR_P = /usr/bin/mkdir -p
 NM = /usr/bin/nm -B
-NMEDIT = nmedit
-NROFF = /usr/bin/nroff
+NMEDIT = 
+NROFF = /usr/bin/gnroff
 NSS_LIBS = 
 OBJDUMP = objdump
 OBJEXT = o
-OTOOL = otool
-OTOOL64 = :
+OTOOL = 
+OTOOL64 = 
 PACKAGE = curl
 PACKAGE_BUGREPORT = a suitable curl mailing list: https://curl.haxx.se/mail/
 PACKAGE_NAME = curl
@@ -923,19 +923,19 @@ PKGADD_VENDOR = curl.haxx.se
 PKGCONFIG = no
 RANDOM_FILE = 
 RANLIB = ranlib
-REQUIRE_LIB_DEPS = yes
+REQUIRE_LIB_DEPS = no
 SED = /usr/bin/sed
 SET_MAKE = 
 SHELL = /bin/sh
-SSL_ENABLED = 1
+SSL_ENABLED = 
 SSL_LIBS = 
 STRIP = strip
-SUPPORT_FEATURES = SSL IPv6 UnixSockets libz AsynchDNS NTLM NTLM_WB
-SUPPORT_PROTOCOLS = DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS LDAP LDAPS POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP
+SUPPORT_FEATURES = IPv6 UnixSockets AsynchDNS
+SUPPORT_PROTOCOLS = DICT FILE FTP GOPHER HTTP IMAP POP3 RTSP SMTP TELNET TFTP
 USE_ARES = 
 USE_AXTLS = 
 USE_CYASSL = 
-USE_DARWINSSL = 1
+USE_DARWINSSL = 
 USE_GNUTLS = 
 USE_GNUTLS_NETTLE = 
 USE_LIBRTMP = 
@@ -950,12 +950,12 @@ USE_UNIX_SOCKETS = 1
 USE_WINDOWS_SSPI = 
 VERSION = -
 VERSIONNUM = 073701
-ZLIB_LIBS = -lz
+ZLIB_LIBS = 
 ZSH_FUNCTIONS_DIR = ${prefix}/share/zsh/site-functions
-abs_builddir = /Users/matthias/Documents/Projects/googleDriveApi/curl/docs/examples
-abs_srcdir = /Users/matthias/Documents/Projects/googleDriveApi/curl/docs/examples
-abs_top_builddir = /Users/matthias/Documents/Projects/googleDriveApi/curl
-abs_top_srcdir = /Users/matthias/Documents/Projects/googleDriveApi/curl
+abs_builddir = /home/matthias/CLionProjects/googleDriveApi/curl/docs/examples
+abs_srcdir = /home/matthias/CLionProjects/googleDriveApi/curl/docs/examples
+abs_top_builddir = /home/matthias/CLionProjects/googleDriveApi/curl
+abs_top_srcdir = /home/matthias/CLionProjects/googleDriveApi/curl
 ac_ct_AR = 
 ac_ct_CC = gcc
 ac_ct_DUMPBIN = 
@@ -965,26 +965,26 @@ am__quote =
 am__tar = $${TAR-tar} chof - "$$tardir"
 am__untar = $${TAR-tar} xf -
 bindir = ${exec_prefix}/bin
-build = x86_64-apple-darwin16.7.0
+build = x86_64-pc-linux-gnu
 build_alias = 
 build_cpu = x86_64
-build_os = darwin16.7.0
-build_vendor = apple
+build_os = linux-gnu
+build_vendor = pc
 builddir = .
 datadir = ${datarootdir}
 datarootdir = ${prefix}/share
 docdir = ${datarootdir}/doc/${PACKAGE_TARNAME}
 dvidir = ${docdir}
 exec_prefix = ${prefix}
-host = x86_64-apple-darwin16.7.0
+host = x86_64-pc-linux-gnu
 host_alias = 
 host_cpu = x86_64
-host_os = darwin16.7.0
-host_vendor = apple
+host_os = linux-gnu
+host_vendor = pc
 htmldir = ${docdir}
 includedir = ${prefix}/include
 infodir = ${datarootdir}/info
-install_sh = ${SHELL} /Users/matthias/Documents/Projects/googleDriveApi/curl/install-sh
+install_sh = ${SHELL} /home/matthias/CLionProjects/googleDriveApi/curl/install-sh
 libdir = ${exec_prefix}/lib
 libexecdir = ${exec_prefix}/libexec
 libext = a
@@ -1022,10 +1022,10 @@ EXTRA_DIST = README Makefile.example Makefile.inc Makefile.m32 \
 # Avoid libcurl obsolete stuff
 AM_CPPFLAGS = -I$(top_srcdir)/include -DCURL_NO_OLDIES $(am__append_1)
 LIBDIR = $(top_builddir)/lib
-#LDADD = $(LIBDIR)/libcurl.la
+LDADD = $(LIBDIR)/libcurl.la
 
 # Dependencies
-LDADD = $(LIBDIR)/libcurl.la -lldap -lz
+#LDADD = $(LIBDIR)/libcurl.la 
 
 # These examples require external dependencies that may not be commonly
 # available on POSIX systems, so don't bother attempting to compile them here.

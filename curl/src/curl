@@ -31,7 +31,7 @@ DUALCASE=1; export DUALCASE # for MKS sh
 # if CDPATH is set.
 (unset CDPATH) >/dev/null 2>&1 && unset CDPATH
 
-relink_command=""
+relink_command="(cd /home/matthias/CLionProjects/googleDriveApi/curl/src; { test -z \"\${LIBRARY_PATH+set}\" || unset LIBRARY_PATH || { LIBRARY_PATH=; export LIBRARY_PATH; }; }; { test -z \"\${COMPILER_PATH+set}\" || unset COMPILER_PATH || { COMPILER_PATH=; export COMPILER_PATH; }; }; { test -z \"\${GCC_EXEC_PREFIX+set}\" || unset GCC_EXEC_PREFIX || { GCC_EXEC_PREFIX=; export GCC_EXEC_PREFIX; }; }; { test -z \"\${LD_RUN_PATH+set}\" || unset LD_RUN_PATH || { LD_RUN_PATH=; export LD_RUN_PATH; }; }; { test -z \"\${LD_LIBRARY_PATH+set}\" || unset LD_LIBRARY_PATH || { LD_LIBRARY_PATH=; export LD_LIBRARY_PATH; }; }; PATH=/usr/lib64/qt-3.3/bin:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/matthias/.local/bin:/home/matthias/bin; export PATH; gcc -Werror-implicit-function-declaration -O2 -Wno-system-headers -pthread -o \$progdir/\$file curl-slist_wc.o curl-tool_binmode.o curl-tool_bname.o curl-tool_cb_dbg.o curl-tool_cb_hdr.o curl-tool_cb_prg.o curl-tool_cb_rea.o curl-tool_cb_see.o curl-tool_cb_wrt.o curl-tool_cfgable.o curl-tool_convert.o curl-tool_dirhie.o curl-tool_doswin.o curl-tool_easysrc.o curl-tool_formparse.o curl-tool_getparam.o curl-tool_getpass.o curl-tool_help.o curl-tool_helpers.o curl-tool_homedir.o curl-tool_hugehelp.o curl-tool_libinfo.o curl-tool_main.o curl-tool_metalink.o curl-tool_mfiles.o curl-tool_msgs.o curl-tool_operate.o curl-tool_operhlp.o curl-tool_panykey.o curl-tool_paramhlp.o curl-tool_parsecfg.o curl-tool_strdup.o curl-tool_setopt.o curl-tool_sleep.o curl-tool_urlglob.o curl-tool_util.o curl-tool_vms.o curl-tool_writeout.o curl-tool_xattr.o ../lib/curl-strtoofft.o ../lib/curl-nonblock.o ../lib/curl-warnless.o  ../lib/.libs/libcurl.so -pthread -Wl,-rpath -Wl,/home/matthias/CLionProjects/googleDriveApi/curl/lib/.libs -Wl,-rpath -Wl,/usr/local/lib)"
 
 # This environment variable determines our operation mode.
 if test "$libtool_install_magic" = "%%%MAGIC variable%%%"; then
@@ -182,20 +182,38 @@ func_exec_program ()
   absdir=`cd "$thisdir" && pwd`
   test -n "$absdir" && thisdir="$absdir"
 
-  program='curl'
+  program=lt-'curl'
   progdir="$thisdir/.libs"
 
+  if test ! -f "$progdir/$program" ||
+     { file=`ls -1dt "$progdir/$program" "$progdir/../$program" 2>/dev/null | /usr/bin/sed 1q`; \
+       test "X$file" != "X$progdir/$program"; }; then
+
+    file="$$-$program"
+
+    if test ! -d "$progdir"; then
+      mkdir "$progdir"
+    else
+      rm -f "$progdir/$file"
+    fi
+
+    # relink executable if necessary
+    if test -n "$relink_command"; then
+      if relink_command_output=`eval $relink_command 2>&1`; then :
+      else
+	$ECHO "$relink_command_output" >&2
+	rm -f "$progdir/$file"
+	exit 1
+      fi
+    fi
+
+    mv -f "$progdir/$file" "$progdir/$program" 2>/dev/null ||
+    { rm -f "$progdir/$program";
+      mv -f "$progdir/$file" "$progdir/$program"; }
+    rm -f "$progdir/$file"
+  fi
 
   if test -f "$progdir/$program"; then
-    # Add our own library path to DYLD_LIBRARY_PATH
-    DYLD_LIBRARY_PATH="/Users/matthias/Documents/Projects/googleDriveApi/curl/lib/.libs:$DYLD_LIBRARY_PATH"
-
-    # Some systems cannot cope with colon-terminated DYLD_LIBRARY_PATH
-    # The second colon is a workaround for a bug in BeOS R4 sed
-    DYLD_LIBRARY_PATH=`$ECHO "$DYLD_LIBRARY_PATH" | /usr/bin/sed 's/::*$//'`
-
-    export DYLD_LIBRARY_PATH
-
     if test "$libtool_execute_magic" != "%%%MAGIC variable%%%"; then
       # Run the actual program with our arguments.
       func_exec_program ${1+"$@"}

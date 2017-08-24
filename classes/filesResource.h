@@ -160,8 +160,8 @@ public:
     long size;
     long quotaBytesUser;
     std::string headRevisionId;
-    imageMediaMetadata imageMediaMetadata;
-    videoMediaMetadata videoMediaMetadata;
+    imageMediaMetadata _imageMediaMetadata;
+    videoMediaMetadata _videoMediaMetadata;
     bool isAppAuthorized;
 
     filesResource();

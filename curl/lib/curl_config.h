@@ -2,7 +2,7 @@
 /* lib/curl_config.h.in.  Generated from configure.ac by autoheader.  */
 
 /* Location of default ca bundle */
-#define CURL_CA_BUNDLE "/etc/ssl/cert.pem"
+#define CURL_CA_BUNDLE "/etc/pki/tls/certs/ca-bundle.crt"
 
 /* define "1" to use built in CA store of SSL library */
 /* #undef CURL_CA_FALLBACK */
@@ -35,10 +35,10 @@
 /* #undef CURL_DISABLE_IMAP */
 
 /* to disable LDAP */
-/* #undef CURL_DISABLE_LDAP */
+#define CURL_DISABLE_LDAP 1
 
 /* to disable LDAPS */
-/* #undef CURL_DISABLE_LDAPS */
+#define CURL_DISABLE_LDAPS 1
 
 /* to disable --libcurl C code generation option */
 /* #undef CURL_DISABLE_LIBCURL_OPTION */
@@ -98,10 +98,10 @@
 #define GETNAMEINFO_TYPE_ARG7 int
 
 /* Specifies the number of arguments to getservbyport_r */
-/* #undef GETSERVBYPORT_R_ARGS */
+#define GETSERVBYPORT_R_ARGS 6
 
 /* Specifies the size of the buffer to pass to getservbyport_r */
-/* #undef GETSERVBYPORT_R_BUFSIZE */
+#define GETSERVBYPORT_R_BUFSIZE 4096
 
 /* Define to 1 if you have the alarm function. */
 #define HAVE_ALARM 1
@@ -128,7 +128,7 @@
 /* #undef HAVE_BORINGSSL */
 
 /* Define to 1 if you have the clock_gettime function and monotonic timer. */
-/* #undef HAVE_CLOCK_GETTIME_MONOTONIC */
+#define HAVE_CLOCK_GETTIME_MONOTONIC 1
 
 /* Define to 1 if you have the closesocket function. */
 /* #undef HAVE_CLOSESOCKET */
@@ -191,10 +191,10 @@
 #define HAVE_FSETXATTR 1
 
 /* fsetxattr() takes 5 args */
-/* #undef HAVE_FSETXATTR_5 */
+#define HAVE_FSETXATTR_5 1
 
 /* fsetxattr() takes 6 args */
-#define HAVE_FSETXATTR_6 1
+/* #undef HAVE_FSETXATTR_6 */
 
 /* Define to 1 if you have the ftruncate function. */
 #define HAVE_FTRUNCATE 1
@@ -215,7 +215,7 @@
 #define HAVE_GETHOSTBYADDR 1
 
 /* Define to 1 if you have the gethostbyaddr_r function. */
-/* #undef HAVE_GETHOSTBYADDR_R */
+#define HAVE_GETHOSTBYADDR_R 1
 
 /* gethostbyaddr_r() takes 5 args */
 /* #undef HAVE_GETHOSTBYADDR_R_5 */
@@ -224,13 +224,13 @@
 /* #undef HAVE_GETHOSTBYADDR_R_7 */
 
 /* gethostbyaddr_r() takes 8 args */
-/* #undef HAVE_GETHOSTBYADDR_R_8 */
+#define HAVE_GETHOSTBYADDR_R_8 1
 
 /* Define to 1 if you have the gethostbyname function. */
 #define HAVE_GETHOSTBYNAME 1
 
 /* Define to 1 if you have the gethostbyname_r function. */
-/* #undef HAVE_GETHOSTBYNAME_R */
+#define HAVE_GETHOSTBYNAME_R 1
 
 /* gethostbyname_r() takes 3 args */
 /* #undef HAVE_GETHOSTBYNAME_R_3 */
@@ -239,7 +239,7 @@
 /* #undef HAVE_GETHOSTBYNAME_R_5 */
 
 /* gethostbyname_r() takes 6 args */
-/* #undef HAVE_GETHOSTBYNAME_R_6 */
+#define HAVE_GETHOSTBYNAME_R_6 1
 
 /* Define to 1 if you have the gethostname function. */
 #define HAVE_GETHOSTNAME 1
@@ -266,7 +266,7 @@
 #define HAVE_GETRLIMIT 1
 
 /* Define to 1 if you have the getservbyport_r function. */
-/* #undef HAVE_GETSERVBYPORT_R */
+#define HAVE_GETSERVBYPORT_R 1
 
 /* Define to 1 if you have the `gettimeofday' function. */
 #define HAVE_GETTIMEOFDAY 1
@@ -364,13 +364,13 @@
 /* #undef HAVE_IO_H */
 
 /* Define to 1 if you have the lber.h header file. */
-#define HAVE_LBER_H 1
+/* #undef HAVE_LBER_H */
 
 /* Define to 1 if you have the ldapssl.h header file. */
 /* #undef HAVE_LDAPSSL_H */
 
 /* Define to 1 if you have the ldap.h header file. */
-#define HAVE_LDAP_H 1
+/* #undef HAVE_LDAP_H */
 
 /* Define to 1 if you have the `ldap_init_fd' function. */
 /* #undef HAVE_LDAP_INIT_FD */
@@ -382,7 +382,7 @@
 /* #undef HAVE_LDAP_SSL_H */
 
 /* Define to 1 if you have the `ldap_url_parse' function. */
-#define HAVE_LDAP_URL_PARSE 1
+/* #undef HAVE_LDAP_URL_PARSE */
 
 /* Define to 1 if you have the <libgen.h> header file. */
 #define HAVE_LIBGEN_H 1
@@ -406,7 +406,7 @@
 /* #undef HAVE_LIBSSL */
 
 /* if zlib is available */
-#define HAVE_LIBZ 1
+/* #undef HAVE_LIBZ */
 
 /* Define to 1 if you have the <limits.h> header file. */
 #define HAVE_LIMITS_H 1
@@ -424,7 +424,7 @@
 #define HAVE_LONGLONG 1
 
 /* Define to 1 if you have the malloc.h header file. */
-/* #undef HAVE_MALLOC_H */
+#define HAVE_MALLOC_H 1
 
 /* Define to 1 if you have the memory.h header file. */
 #define HAVE_MEMORY_H 1
@@ -433,7 +433,7 @@
 /* #undef HAVE_MEMRCHR */
 
 /* Define to 1 if you have the MSG_NOSIGNAL flag. */
-/* #undef HAVE_MSG_NOSIGNAL */
+#define HAVE_MSG_NOSIGNAL 1
 
 /* Define to 1 if you have the <netdb.h> header file. */
 #define HAVE_NETDB_H 1
@@ -491,10 +491,10 @@
 #define HAVE_PIPE 1
 
 /* Define to 1 if you have a working poll function. */
-/* #undef HAVE_POLL */
+#define HAVE_POLL 1
 
 /* If you have a fine poll */
-/* #undef HAVE_POLL_FINE */
+#define HAVE_POLL_FINE 1
 
 /* Define to 1 if you have the <poll.h> header file. */
 #define HAVE_POLL_H 1
@@ -530,7 +530,7 @@
 #define HAVE_SETLOCALE 1
 
 /* Define to 1 if you have the `setmode' function. */
-#define HAVE_SETMODE 1
+/* #undef HAVE_SETMODE */
 
 /* Define to 1 if you have the `setrlimit' function. */
 #define HAVE_SETRLIMIT 1
@@ -647,7 +647,7 @@
 #define HAVE_STRUCT_TIMEVAL 1
 
 /* Define to 1 if you have the <sys/filio.h> header file. */
-#define HAVE_SYS_FILIO_H 1
+/* #undef HAVE_SYS_FILIO_H */
 
 /* Define to 1 if you have the <sys/ioctl.h> header file. */
 #define HAVE_SYS_IOCTL_H 1
@@ -668,7 +668,7 @@
 #define HAVE_SYS_SOCKET_H 1
 
 /* Define to 1 if you have the <sys/sockio.h> header file. */
-#define HAVE_SYS_SOCKIO_H 1
+/* #undef HAVE_SYS_SOCKIO_H */
 
 /* Define to 1 if you have the <sys/stat.h> header file. */
 #define HAVE_SYS_STAT_H 1
@@ -698,7 +698,7 @@
 #define HAVE_TERMIOS_H 1
 
 /* Define to 1 if you have the <termio.h> header file. */
-/* #undef HAVE_TERMIO_H */
+#define HAVE_TERMIO_H 1
 
 /* Define to 1 if you have the <time.h> header file. */
 #define HAVE_TIME_H 1
@@ -761,7 +761,7 @@
 /* #undef HAVE_X509_H */
 
 /* if you have the zlib.h header file */
-#define HAVE_ZLIB_H 1
+/* #undef HAVE_ZLIB_H */
 
 /* Define to the sub-directory where libtool stores uninstalled libraries. */
 #define LT_OBJDIR ".libs/"
@@ -782,13 +782,13 @@
 /* #undef NEED_THREAD_SAFE */
 
 /* Define to enable NTLM delegation to winbind's ntlm_auth helper. */
-#define NTLM_WB_ENABLED 1
+/* #undef NTLM_WB_ENABLED */
 
 /* Define absolute filename for winbind's ntlm_auth helper. */
-#define NTLM_WB_FILE "/usr/bin/ntlm_auth"
+/* #undef NTLM_WB_FILE */
 
 /* cpu-machine-OS */
-#define OS "x86_64-apple-darwin16.7.0"
+#define OS "x86_64-pc-linux-gnu"
 
 /* Name of package */
 #define PACKAGE "curl"
@@ -908,7 +908,7 @@
 /* #undef USE_CYASSL */
 
 /* to enable Apple OS native SSL/TLS support */
-#define USE_DARWINSSL 1
+/* #undef USE_DARWINSSL */
 
 /* if GnuTLS is enabled */
 /* #undef USE_GNUTLS */

@@ -71,7 +71,7 @@ while test $# -gt 0; do
         ;;
 
     --ca)
-        echo "/etc/ssl/cert.pem"
+        echo "/etc/pki/tls/certs/ca-bundle.crt"
         ;;
 
     --cc)
@@ -83,13 +83,13 @@ while test $# -gt 0; do
         ;;
 
     --feature|--features)
-        for feature in SSL IPv6 UnixSockets libz AsynchDNS NTLM NTLM_WB ""; do
+        for feature in IPv6 UnixSockets AsynchDNS ""; do
             test -n "$feature" && echo "$feature"
         done
         ;;
 
     --protocols)
-        for protocol in DICT FILE FTP FTPS GOPHER HTTP HTTPS IMAP IMAPS LDAP LDAPS POP3 POP3S RTSP SMB SMBS SMTP SMTPS TELNET TFTP; do
+        for protocol in DICT FILE FTP GOPHER HTTP IMAP POP3 RTSP SMTP TELNET TFTP; do
             echo "$protocol"
         done
         ;;
@@ -147,8 +147,8 @@ while test $# -gt 0; do
         else
            CURLLIBDIR=""
         fi
-        if test "Xyes" = "Xyes"; then
-          echo ${CURLLIBDIR}-lcurl -lldap -lz
+        if test "Xno" = "Xyes"; then
+          echo ${CURLLIBDIR}-lcurl 
         else
           echo ${CURLLIBDIR}-lcurl
         fi
@@ -156,7 +156,7 @@ while test $# -gt 0; do
 
     --static-libs)
         if test "Xyes" != "Xno" ; then
-          echo ${exec_prefix}/lib/libcurl.a -framework CoreFoundation -framework Security -lldap -lz
+          echo ${exec_prefix}/lib/libcurl.a  
         else
           echo "curl was built with static libraries disabled" >&2
           exit 1
@@ -164,7 +164,7 @@ while test $# -gt 0; do
         ;;
 
     --configure)
-        echo " '--with-darwinssl' '--with-libcurl_libraries'"
+        echo " '--with-ssl'"
         ;;
 
     *)

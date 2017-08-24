@@ -21,7 +21,7 @@ using namespace std;
 
 class googleDriveApi {
 private:
-    static long request(string host, string path, string type, map<string, string> querystring, vector<string> header, map<string, string> postfields, string body, rapidjson::Document& response);
+    static long request(string host, string path, string type, map<string, string> querystring, map<string, string> header, map<string, string> postfields, string body, rapidjson::Document& response);
 public:
     static bool getAuthCode(string code, string clientId, string clientSecret, string redirectUri, string grantType);
 
