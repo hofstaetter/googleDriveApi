@@ -2,7 +2,7 @@
 // Created by Matthias Hofstätter on 15.09.17.
 //
 
-#include "permissionsGoogleDriveApi.h"
+#include "permissions/permissionsGoogleDriveApi.h"
 
 permissionsResource permissionsGoogleDriveApi::create(string fileId, string emailMessage, bool sendNotificationEmail,
                                                       bool suportsTeamDrives, bool transferOwnership,

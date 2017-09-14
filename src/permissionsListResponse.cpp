@@ -2,4 +2,4 @@
 // Created by Matthias Hofstätter on 15.09.17.
 //
 
-#include "permissionsListResponse.h"
+#include "permissions/permissionsListResponse.h"
