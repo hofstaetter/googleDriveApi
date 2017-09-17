@@ -9,6 +9,7 @@
 #include <ctime>
 #include <string>
 #include <vector>
+#include "jsonObject.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ public:
     };
 
     permission();
-    permission(rapidjson::Document &document);
+    permission(rapidjson::Document &doc);
 private:
     string kind;
     string id;

@@ -3,9 +3,9 @@
 //
 
 #include "classes/file.h"
+#include <vector>
 
 file::file() {
-    jsonObject::jsonObject();
 }
 
 file::file(rapidjson::Document& document) {
@@ -31,7 +31,7 @@ file::file(rapidjson::Document& document) {
             this->parents.push_back(v.GetString());
         }
     }*/
-    jsonObject::jsonObject(document);
+    this->document.CopyFrom(document, this->document.GetAllocator());
 }
 
 string file::getKind() {
@@ -99,7 +99,7 @@ void file::setExplicitlyTrashed(bool explicitlyTrashed) {
 }
 
 user file::getTrashingUser() {
-    return user(this->getObject("trashingUser").document);
+    return user(this->getObject("trashingUser"));
 }
 
 void file::setTrashingUser(user &trashingUser) {
@@ -259,7 +259,7 @@ void file::setSharedWithMeTime(string &sharedWithMeTime) {
 }
 
 user file::getSharingUser() {
-    return user(this->getObject("sharingUser").document);
+    return user(this->getObject("sharingUser"));
 }
 
 void file::setSharingUser(user &sharingUser) {
@@ -267,11 +267,19 @@ void file::setSharingUser(user &sharingUser) {
 }
 
 vector<user> file::getOwners() {
-    return this->getObjectArray("owners");
+    vector<user> result;
+    for(rapidjson::Document d : this->getObjectArray("owners")) {
+        result.push_back(user(d));
+    }
+    return result;
 }
 
 void file::setOwners(vector<user> &owners) {
-    this->setObjectArray("owners", owners);
+    std::vector<rapidjson::Documents> v;
+    for(user u : owners) {
+        v.push_back(u.document);
+    }
+    this->setObjectArray("owners", v);
 }
 
 string file::getTeamDriveId() {

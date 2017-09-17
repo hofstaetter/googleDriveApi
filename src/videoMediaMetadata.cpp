@@ -7,9 +7,8 @@
 #include "classes/videoMediaMetadata.h"
 
 videoMediaMetadata::videoMediaMetadata() {
-    jsonObject::jsonObject();
 }
 
 videoMediaMetadata::videoMediaMetadata(rapidjson::Document &document) {
-    jsonObject::jsonObject(document);
+    this->document.CopyFrom(document, this->document.GetAllocator());
 }

@@ -102,20 +102,21 @@ float jsonObject::getFloat(string key) {
     return 0.0;
 }
 
-void jsonObject::setObject(string key, jsonObject object) {
-    this->document.AddMember(rapidjson::StringRef(key.c_str()), rapidjson::Value(object.document, this->document.GetAllocator()), this->document.GetAllocator());
+void jsonObject::setObject(string key, rapidjson::Document &document) {
+    this->document.AddMember(rapidjson::StringRef(key.c_str()), rapidjson::Value(document, this->document.GetAllocator()), this->document.GetAllocator());
 }
 
-jsonObject jsonObject::getObject(string key) {
+rapidjson::Document &jsonObject::getObject(string key) {
     if(this->document.HasMember(key.c_str()) && this->document[key.c_str()].IsObject()) {
         rapidjson::Document result;
         result.CopyFrom(this->document[key.c_str()], result.GetAllocator());
-        return jsonObject(result);
+        return result;
     }
-    return NULL;
+    rapidjson::Document d(rapidjson::kNullType);
+    return d;
 }
 
-void jsonObject::setStringArray(string key, vector<string> vec) {
+void jsonObject::setStringArray(string key, vector<string> &vec) {
     rapidjson::Value v(rapidjson::kArrayType);
     for(string s : vec) {
         v.PushBack(rapidjson::StringRef(s.c_str()), this->document.GetAllocator());
@@ -123,18 +124,18 @@ void jsonObject::setStringArray(string key, vector<string> vec) {
     this->document.AddMember(rapidjson::StringRef(key.c_str()), v, this->document.GetAllocator());
 }
 
-vector<string> jsonObject::getStringArray(string key) {
+vector<string> &jsonObject::getStringArray(string key) {
     if(this->document.HasMember(key.c_str()) && this->document[key.c_str()].IsArray()) {
         vector<string> result;
         for (auto &s : this->document[key.c_str()].GetArray()) {
             result.push_back(s.GetString());
         }
-        return vector<string>();
+        return result;
     }
-    return NULL;
+    return {};
 }
 
-void jsonObject::setStringMap(string key, map<string, string> map) {
+void jsonObject::setStringMap(string key, map<string, string> &map) {
     rapidjson::Value v(rapidjson::kObjectType);
     for(auto &p : map) {
         v.AddMember(rapidjson::StringRef(p.first.c_str()), rapidjson::StringRef(p.second.c_str()), this->document.GetAllocator());
@@ -142,34 +143,32 @@ void jsonObject::setStringMap(string key, map<string, string> map) {
     this->document.AddMember(rapidjson::StringRef(key.c_str()), v, this->document.GetAllocator());
 }
 
-map<string, string> jsonObject::getStringMap(string key) {
+map<string, string> &jsonObject::getStringMap(string key) {
+    map<string, string> result;
     if(this->document.HasMember(key.c_str()) && this->document[key.c_str()].IsObject()) {
-        map<string, string> result;
         for(rapidjson::Value::ConstMemberIterator itr = this->document[key.c_str()].MemberBegin(); itr != this->document[key.c_str()].MemberEnd(); itr++) {
             result.insert(itr->name.GetString(), itr->value.GetString());
         }
-        return result;
     }
-    return NULL;
+    return result;
 }
 
-void jsonObject::setObjectArray(string key, vector<jsonObject> vec) {
+void jsonObject::setObjectArray(string key, vector<rapidjson::Document> &vec) {
     rapidjson::Value v(rapidjson::kArrayType);
-    for(jsonObject jo : vec) {
-        v.PushBack(jo.document, this->document.GetAllocator());
+    for(rapidjson::Document d : vec) {
+        v.PushBack(d, this->document.GetAllocator());
     }
     this->document.AddMember(rapidjson::StringRef(key.c_str()), v, this->document.GetAllocator());
 }
 
-vector<jsonObject> jsonObject::getObjectArray(string key) {
+vector<rapidjson::Document &> jsonObject::getObjectArray(string key) {
+    vector<rapidjson::Document> result;
     if(this->document.HasMember(key.c_str()) && this->document[key.c_str()].IsArray()) {
-        vector<jsonObject> result;
         for(auto &o : this->document[key.c_str()].GetArray()) {
             rapidjson::Document d;
             d.CopyFrom(o, d.GetAllocator());
-            result.push_back(jsonObject(d));
+            result.push_back(d);
         }
-        return result;
     }
-    return NULL;
+    return result;
 }

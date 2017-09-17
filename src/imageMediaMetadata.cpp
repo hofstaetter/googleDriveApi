@@ -7,9 +7,8 @@
 #include "classes/imageMediaMetadata.h"
 
 imageMediaMetadata::imageMediaMetadata() {
-    jsonObject::jsonObject();
 }
 
 imageMediaMetadata::imageMediaMetadata(rapidjson::Document &document) {
-    jsonObject::jsonObject(document);
+    this->document.CopyFrom(document, this->document.GetAllocator());
 }

@@ -5,9 +5,8 @@
 #include "capabilities.h"
 
 capabilities::capabilities() {
-    jsonObject::jsonObject();
 }
 
 capabilities::capabilities(rapidjson::Document &document) : jsonObject(document) {
-    jsonObject::jsonObject(document);
+    this->document.CopyFrom(document, this->document.GetAllocator());
 }

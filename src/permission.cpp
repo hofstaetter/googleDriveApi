@@ -7,9 +7,8 @@
 #include "classes/permission.h"
 
 permission::permission() {
-    jsonObject::jsonObject();
 }
 
-permission::permission(rapidjson::Document &document) {
-    jsonObject::jsonObject(document);
+permission::permission(rapidjson::Document &doc) {
+    this->document.CopyFrom(document, this->document.GetAllocator());
 }

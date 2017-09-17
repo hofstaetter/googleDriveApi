@@ -27,10 +27,10 @@ public:
     void setULong(string key, uint64_t ul);
     void setDouble(string key, double d);
     void setFloat(string key, float f);
-    void setObject(string key, jsonObject object);
-    void setStringArray(string key, vector<string> vec);
-    void setStringMap(string key, map<string, string> map);
-    void setObjectArray(string key, vector<jsonObject> vec);
+    void setObject(string key, rapidjson::Document &object);
+    void setStringArray(string key, vector<string> &vec);
+    void setStringMap(string key, map<string, string> &map);
+    void setObjectArray(string key, vector<rapidjson::Document> &vec);
 
     string getString(string key);
     bool getBool(string key);
@@ -40,10 +40,10 @@ public:
     uint64_t getULong(string key);
     double getDouble(string key);
     float getFloat(string key);
-    jsonObject getObject(string key);
-    vector<string> getStringArray(string key);
-    map<string, string> getStringMap(string key);
-    vector<jsonObject> getObjectArray(string key);
+    rapidjson::Document &getObject(string key);
+    vector<string> &getStringArray(string key);
+    map<string, string> &getStringMap(string key);
+    vector<rapidjson::Document &> getObjectArray(string key);
 
     virtual string toString();
 };
