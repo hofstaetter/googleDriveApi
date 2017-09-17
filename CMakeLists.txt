@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(GoogleDriveApi)
+project(googleDriveApi)
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -19,9 +19,9 @@ set(GOOGLEDRIVEAPI_INCLUDE_DIR include rapidjson/include/rapidjson ${CURL_INCLUD
 include_directories(${GOOGLEDRIVEAPI_INCLUDE_DIR})
 message("${GOOGLEDRIVEAPI_INCLUDE_DIR}")
 
-set(SOURCE_FILES src/filesGoogleDriveApi.cpp include/files/filesGoogleDriveApi.h src/filesResource.cpp include/files/filesResource.h src/filesGenerateIdsResponse.cpp include/files/filesGenerateIdsResponse.h src/user.cpp include/user.h src/filesWatchResponse.cpp include/files/filesWatchResponse.h src/filesListResponse.cpp include/files/filesListResponse.h src/googleOAuth.cpp include/oauth/googleOAuth.h src/https.cpp include/https.h src/filesWatchRequest.cpp include/files/filesWatchRequest.h src/changesGoogleDriveApi.cpp include/changes/changesGoogleDriveApi.h src/changesListResponse.cpp include/changes/changesListResponse.h src/changesResource.cpp include/changes/changesResource.h src/teamdrivesResource.cpp include/changes/teamdrivesResource.h src/changesGetStartPageTokenResponse.cpp include/changes/changesGetStartPageTokenResponse.h src/changesWatchResponse.cpp include/changes/changesWatchResponse.h src/changesWatchRequest.cpp include/changes/changesWatchRequest.h src/channelsGoogleDriveApi.cpp include/channels/channelsGoogleDriveApi.h src/channelsStopRequest.cpp include/channels/channelsStopRequest.h src/commentsGoogleDriveApi.cpp include/comments/commentsGoogleDriveApi.h src/commentsResource.cpp include/comments/commentsResource.h src/googleDriveApi.cpp include/googleDriveApi.h src/commentsListResponse.cpp include/comments/commentsListResponse.h src/permissionsGoogleDriveApi.cpp include/permissions/permissionsGoogleDriveApi.h src/permissionsResource.cpp include/permissions/permissionsResource.h src/permissionsListResponse.cpp include/permissions/permissionsListResponse.h)
-add_library(GoogleDriveApi ${SOURCE_FILES})
+set(SOURCE_FILES src/files.cpp include/files/files.h src/file.cpp include/classes/file.h src/generatedIds.cpp include/classes/generatedIds.h src/user.cpp include/classes/user.h src/channel.cpp include/classes/channel.h src/fileList.cpp include/classes/fileList.h src/googleOAuth.cpp include/oauth/googleOAuth.h src/https.cpp include/classes/https.h src/channel.cpp include/classes/channel.h src/changes.cpp include/changes/changes.h src/changeList.cpp include/classes/changeList.h src/change.cpp include/classes/change.h src/teamDrive.cpp include/classes/teamDrive.h src/startPageToken.cpp include/classes/startPageToken.h src/channels.cpp include/channels/channels.h src/comments.cpp include/comments/comments.h src/comment.cpp include/classes/comment.h src/googleDriveApi.cpp include/googleDriveApi.h src/commentList.cpp include/classes/commentList.h src/permissions.cpp include/permissions/permissions.h src/permission.cpp include/classes/permission.h src/permissionList.cpp include/classes/permissionList.h src/replies.cpp include/replies/replies.h src/reply.cpp include/classes/reply.h src/replyList.cpp include/classes/replyList.h src/backgroundImageFile.cpp include/classes/backgroundImageFile.h include/classes/capabilities.cpp include/classes/capabilities.h src/videoMediaMetadata.cpp include/classes/videoMediaMetadata.h src/imageMediaMetadata.cpp include/classes/imageMediaMetadata.h src/location.cpp include/classes/location.h include/classes/contentHint.cpp include/classes/contentHint.h include/classes/thumbnail.cpp include/classes/thumbnail.h include/classes/jsonObject.cpp include/classes/jsonObject.h include/classes/dateTime.h)
+add_library(googleDriveApi ${SOURCE_FILES})
 
 if(CURL_FOUND)
-    target_link_libraries(GoogleDriveApi curl)
+    target_link_libraries(googleDriveApi curl)
 endif(CURL_FOUND)

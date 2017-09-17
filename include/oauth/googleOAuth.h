@@ -8,8 +8,8 @@
 #include <string>
 #include <rapidjson.h>
 #include <document.h>
-#include "files/filesGoogleDriveApi.h"
-#include "https.h"
+#include "files/files.h"
+#include "classes/https.h"
 
 using namespace std;
 
