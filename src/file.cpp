@@ -6,32 +6,12 @@
 #include <vector>
 
 file::file() {
+    this->document = new rapidjson::Document;
 }
 
 file::file(rapidjson::Document& document) {
-    /*if(document.HasMember("kind"))
-        this->kind = document["kind"].GetString();
-    if(document.HasMember("id"))
-        this->id = document["id"].GetString();
-    if(document.HasMember("name"))
-        this->name = document["name"].GetString();
-    if(document.HasMember("mimeType"))
-        this->mimeType = document["mimeType"].GetString();
-    if(document.HasMember("description"))
-        this->description = document["description"].GetString();
-    if(document.HasMember("starred"))
-        this->starred = document["starred"].GetBool();
-    if(document.HasMember("trashed"))
-        this->trashed = document["trashed"].GetBool();
-    if(document.HasMember("explicitlyTrashed"))
-        this->explicitlyTrashed = document["explicitlyTrashed"].GetBool();
-
-    if(document.HasMember("parents")) {
-        for(auto& v : document["parents"].GetArray()) {
-            this->parents.push_back(v.GetString());
-        }
-    }*/
-    this->document.CopyFrom(document, this->document.GetAllocator());
+    this->document = new rapidjson::Document;
+    (*this->document).CopyFrom(document, (this->document)->GetAllocator());
 }
 
 string file::getKind() {
@@ -99,11 +79,11 @@ void file::setExplicitlyTrashed(bool explicitlyTrashed) {
 }
 
 user file::getTrashingUser() {
-    return user(this->getObject("trashingUser"));
+    return this->getObject<user>("trashingUser");
 }
 
-void file::setTrashingUser(user &trashingUser) {
-    this->setObject("trashingUser", trashingUser.document);
+void file::setTrashingUser(user trashingUser) {
+    this->setObject("trashingUser", trashingUser);
 }
 
 string file::getTrashedTime() {
@@ -114,7 +94,7 @@ void file::setTrashedTime(string &trashedTime) {
     this->setString("trashedTime", trashedTime);
 }
 
-vector<string> file::getParents() {
+/*vector<string> file::getParents() {
     return this->getStringArray("parents");
 }
 
@@ -144,7 +124,7 @@ vector<string> file::getSpaces() {
 
 void file::setSpaces(vector<string> &spaces) {
     this->setStringArray("spaces", spaces);
-}
+}*/
 
 long file::getVersion() {
     return this->getLong("version");
@@ -259,28 +239,29 @@ void file::setSharedWithMeTime(string &sharedWithMeTime) {
 }
 
 user file::getSharingUser() {
-    return user(this->getObject("sharingUser"));
+    return user(this->getObject<user>("sharingUser"));
 }
 
-void file::setSharingUser(user &sharingUser) {
-    this->setObject("sharingUser", sharingUser.document);
+void file::setSharingUser(user sharingUser) {
+    this->setObject("sharingUser", sharingUser);
 }
 
-vector<user> file::getOwners() {
+/*vector<user> file::getOwners() {
     vector<user> result;
-    for(rapidjson::Document d : this->getObjectArray("owners")) {
+    vector<rapidjson::Document> vec = this->getObjectArray("owners");
+    for(auto &d : ) {
         result.push_back(user(d));
     }
     return result;
 }
 
 void file::setOwners(vector<user> &owners) {
-    std::vector<rapidjson::Documents> v;
-    for(user u : owners) {
+    std::vector<rapidjson::Document> v;
+    for(user &u : owners) {
         v.push_back(u.document);
     }
     this->setObjectArray("owners", v);
-}
+}*/
 
 string file::getTeamDriveId() {
     return this->getString("teamDriveId");
@@ -291,11 +272,11 @@ void file::setTeamDriveId(string &teamDriveId) {
 }
 
 user file::getLastModifyingUser() {
-    return this->getObject("lastModifyingUser");
+    return this->getObject<user>("lastModifyingUser");
 }
 
 void file::setLastModifyingUser(user &lastModifyingUser) {
-    this->setObject("lastModifyingUser", lastModifyingUser.document);
+    this->setObject("lastModifyingUser", lastModifyingUser);
 }
 
 bool file::isShared() {
@@ -315,11 +296,11 @@ void file::setOwnedByMe(bool ownedByMe) {
 }
 
 capabilities file::getCapabilities() {
-    return capabilities(this->getObject("capabilities"));
+    return this->getObject<capabilities>("capabilities");
 }
 
 void file::setCapabilities(class capabilities &capabilities) {
-    this->setObject("capabilities", capabilities.document);
+    this->setObject("capabilities", capabilities);
 }
 
 bool file::isViewersCanCopyContent() {
@@ -338,13 +319,21 @@ void file::setWritersCanShare(bool writersCanShare) {
     this->setBool("writersCanShare", writersCanShare);
 }
 
-vector<permission> file::getPermissions() {
-    return this->getObjectArray("permissions");
+/*vector<permission> file::getPermissions() {
+    vector<permission> result;
+    for(auto d : this->getObjectArray("permissions")) {
+        result.push_back(permission(d));
+    }
+    return result;
 }
 
 void file::setPermissions(vector<permission> &permissions) {
-    this->setObjectArray("permissions", permissions);
-}
+    vector<rapidjson::Document> v;
+    for(permission &p : permissions) {
+        v.push_back(p.document);
+    }
+    this->setObjectArray("permissions", v);
+}*/
 
 bool file::isHasAugmentedPermissions() {
     return this->getBool("hasAugmentedPermissions");
@@ -419,7 +408,7 @@ void file::setHeadRevisionId(string &headRevisionId) {
 }
 
 imageMediaMetadata file::getImageMediaMetadata() {
-    return imageMediaMetadata(this->getObject("imageMediaMetadata").document);
+    return this->getObject<imageMediaMetadata>("imageMediaMetadata");
 }
 
 void file::setImageMediaMetadata(class imageMediaMetadata &imageMediaMetadata) {
@@ -427,7 +416,7 @@ void file::setImageMediaMetadata(class imageMediaMetadata &imageMediaMetadata) {
 }
 
 class videoMediaMetadata file::getVideoMediaMetadata() {
-    return videoMediaMetadata(this->getObject("videoMediaMetadata").document);
+    return this->getObject<videoMediaMetadata>("videoMediaMetadata");
 }
 
 void file::setVideoMediaMetadata(class videoMediaMetadata &videoMediaMetadata) {

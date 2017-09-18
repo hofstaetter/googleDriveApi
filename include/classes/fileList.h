@@ -7,6 +7,7 @@
 
 #include "files/files.h"
 #include "file.h"
+#include "jsonObject.h"
 #include <rapidjson.h>
 #include <document.h>
 #include <writer.h>
@@ -16,28 +17,23 @@
 
 using namespace std;
 
-class fileList {
-private:
-    string kind;
-    string nextPageToken;
-    bool incompleteSearch;
-    vector<class file> files;
+class fileList: public jsonObject {
 public:
-    const string &getKind() const;
+    string getKind();
 
-    void setKind(const string &kind);
+    void setKind(string kind);
 
-    const string &getNextPageToken() const;
+    string getNextPageToken();
 
-    void setNextPageToken(const string &nextPageToken);
+    void setNextPageToken(string nextPageToken);
 
-    bool isIncompleteSearch() const;
+    bool isIncompleteSearch();
 
     void setIncompleteSearch(bool incompleteSearch);
 
-    const vector<class file> &getFiles() const;
+    vector<class file> getFiles();
 
-    void setFiles(const vector<class file> &files);
+    void setFiles(vector<class file> files);
 
 public:
     fileList();

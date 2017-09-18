@@ -13,7 +13,7 @@ files::list(string corpora, string corpus, bool includeTeamDriveItems, string or
         googleOAuth::authenticate();
     }
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
     map<string, string> querystring = { make_pair("corpora", corpora), /*make_pair("corpus", corpus),*/ /*make_pair("includeTeamDriveItems", includeTeamDriveItems ? "true" : "false"),*/ make_pair("orderBy", orderBy),
                                         make_pair("pageSize", to_string(pageSize)), make_pair("pageToken", pageToken), make_pair("q", q), make_pair("spaces", spaces), make_pair("supportsTeamDrives", supportsTeamDrives ? "true" : "false"),
@@ -25,7 +25,13 @@ files::list(string corpora, string corpus, bool includeTeamDriveItems, string or
 
     if(responseCode != 200) { throw -1; }
 
-    fileList lr(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    fileList lr(responseJson);
 
     return lr;
 }
@@ -37,14 +43,20 @@ files::copy(string fileId, bool ignoreDefaultVisibility, bool keepRevisionForeve
         googleOAuth::authenticate();
     }
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId).append("/copy"), "POST", {}, {}, {}, requestBody.toString(), responseHeaders, responseBody);
 
     if(responseCode != 200) throw -1;
 
-    file fr(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    file fr(responseJson);
 
     return fr;
 }
@@ -65,14 +77,20 @@ files::create(string uploadType, bool ignoreDefaultVisibility, bool keepRevision
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", "/drive/v3/files/", "POST", querystring, headers, {}, requestBody.toString(), responseHeaders, responseBody);
 
     if(responseCode != 200) throw -1;
 
-    file fr(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    file fr(responseJson);
 
     return fr;
 }
@@ -88,13 +106,12 @@ files::del(string fileId, bool supportsTeamDrives,
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "DELETE", querystring, headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode != 204) return false;
-
     return true;
 }
 
@@ -106,7 +123,7 @@ bool files::emptyTrash(bool alt, string fields, bool prettyPrint, string quotaUs
     map<string, string> querystring = { make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", "/drive/v3/files/trash", "DELETE", querystring, headers, {}, "", responseHeaders, responseBody);
@@ -126,14 +143,20 @@ files::exp(string fileId, string mimeType,
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     //map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId).append("/export"), "GET", querystring, {}, {}, "", responseHeaders, responseBody);
 
     if(responseCode == 200) throw -1;
 
-    return file();
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    return file(responseJson);
 }
 
 generatedIds
@@ -147,7 +170,7 @@ files::generateIds(int count, string space, bool alt, string fields, bool pretty
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", "/drive/v3/files/generateIds", "GET", querystring, headers, {}, "", responseHeaders, responseBody);
@@ -156,7 +179,13 @@ files::generateIds(int count, string space, bool alt, string fields, bool pretty
         throw -1;
     }
 
-    generatedIds gir(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    generatedIds gir(responseJson);
 
     return gir;
 }
@@ -172,7 +201,7 @@ files::get(string fileId, bool acknowledgeAbuse, bool supportsTeamDrives, bool a
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, "", responseHeaders, responseBody);
@@ -181,7 +210,13 @@ files::get(string fileId, bool acknowledgeAbuse, bool supportsTeamDrives, bool a
         throw -1;
     }
 
-    file fr(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    file fr(responseJson);
 
     return fr;
 }
@@ -197,7 +232,7 @@ file files::update(string fileId, string uploadType,  string addParents, bool ke
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, "", responseHeaders, responseBody);
@@ -206,7 +241,13 @@ file files::update(string fileId, string uploadType,  string addParents, bool ke
         throw -1;
     }
 
-    file fr(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    file fr(responseJson);
 
     return fr;
 }
@@ -222,14 +263,20 @@ files::watch(string fileId, bool acknowledgeAbuse, bool supportsTeamDrives, chan
                                         make_pair("alt", alt  ? "" : "json"), make_pair("fields", fields), make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId) };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(googleOAuth::getAccessToken())) };
 
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
 
     long responseCode = https::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, requestBody.toString(), responseHeaders, responseBody);
 
     if(responseCode != 200) throw -1;
 
-    channel wr(responseBody);
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
 
-    return wr;
+    channel c(responseJson);
+
+    return c;
 }

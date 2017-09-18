@@ -66,13 +66,13 @@ public:
 
     user getTrashingUser();
 
-    void setTrashingUser(user &trashingUser);
+    void setTrashingUser(user trashingUser);
 
     string getTrashedTime();
 
     void setTrashedTime(string &trashedTime);
 
-    vector<string> getParents();
+    /*vector<string> getParents();
 
     void setParents(vector<string> &parents);
 
@@ -86,7 +86,7 @@ public:
 
     vector<string> getSpaces();
 
-    void setSpaces(vector<string> &spaces);
+    void setSpaces(vector<string> &spaces);*/
 
     long getVersion();
 
@@ -146,11 +146,11 @@ public:
 
     user getSharingUser();
 
-    void setSharingUser(user &sharingUser);
+    void setSharingUser(user sharingUser);
 
-    vector<user> getOwners();
+    /*vector<user> getOwners();
 
-    void setOwners(vector<user> &owners);
+    void setOwners(vector<user> &owners);*/
 
     string getTeamDriveId();
 
@@ -180,9 +180,9 @@ public:
 
     void setWritersCanShare(bool writersCanShare);
 
-    vector<permission> getPermissions();
+    /*vector<permission> getPermissions();
 
-    void setPermissions(vector<permission> &permissions);
+    void setPermissions(vector<permission> &permissions);*/
 
     bool isHasAugmentedPermissions();
 

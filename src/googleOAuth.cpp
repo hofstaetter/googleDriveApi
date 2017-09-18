@@ -14,7 +14,7 @@ time_t googleOAuth::expire;
 
 void googleOAuth::requestAuthorizationCode(string clientId, string redirectUri, string responseType, string scope, string state, string includeGrantedScopes,
                                            string loginHint, string prompt) {
-    rapidjson::Document responseBody;
+    string responseBody;
     string responseHeaders;
     long httpcode = https::request("https://accounts.google.com", "/o/oauth2/v2/auth", "POST", { make_pair("response_type", responseType), make_pair("client_id", clientId), make_pair("redirect_uri", redirectUri),
                                                                                                  make_pair("scope", scope) },
@@ -22,7 +22,7 @@ void googleOAuth::requestAuthorizationCode(string clientId, string redirectUri, 
                                             {}, //{ make_pair("code", authCode), make_pair("client_id", clientId), make_pair("client_secret", clientSecret), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("grant_type", "authorization_code") },
                                             "", responseHeaders, responseBody);
 
-    if(httpcode != 302) { throw responseBody; }
+    if(httpcode != 302) { throw -1; }
 
     cout << "Please visit following URL and paste the AuthCode below: " << responseHeaders.substr(responseHeaders.find("Location", 0) + 10, responseHeaders.find("\r\n", responseHeaders.find("Location", 0)) - responseHeaders.find("Location", 0) - 10) << endl;
     cin >> googleOAuth::authorizationCode;
@@ -36,7 +36,7 @@ void googleOAuth::requestTokens(string clientId, string clientSecret) {
     }
 
     string responseHeaders;
-    rapidjson::Document responseBody;
+    string responseBody;
     long httpcode = https::request("https://www.googleapis.com", "/oauth2/v4/token", "POST", { },
                                             { make_pair("content-type", "application/x-www-form-urlencoded") },
                                             { make_pair("grant_type", "authorization_code"), make_pair("code", googleOAuth::authorizationCode), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("client_id", clientId), make_pair("client_secret", clientSecret) }, //{ make_pair("code", authCode), make_pair("client_id", clientId), make_pair("client_secret", clientSecret), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("grant_type", "authorization_code") },
@@ -45,9 +45,17 @@ void googleOAuth::requestTokens(string clientId, string clientSecret) {
 
     if(httpcode != 200) { throw responseBody; }
 
-    googleOAuth::refreshToken = responseBody["refresh_token"].GetString();
-    googleOAuth::accessToken = responseBody["access_token"].GetString();
-    googleOAuth::expire = time(NULL) + 3600;
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    if(responseJson.IsObject() && responseJson.HasMember("refresh_token") && responseJson.HasMember("access_token")) {
+        googleOAuth::refreshToken = responseJson["refresh_token"].GetString();
+        googleOAuth::accessToken = responseJson["access_token"].GetString();
+        googleOAuth::expire = time(NULL) + 3600;
+    } else { throw responseJson; }
 }
 
 void googleOAuth::refreshAccessToken(string clientSecret, string grantType, string refreshToken, string clientId) {
@@ -60,15 +68,23 @@ void googleOAuth::refreshAccessToken(string clientSecret, string grantType, stri
     }
 
     string responseHeaders;
-    rapidjson::Document responseBody;
+    string responseBody;
 
     long httpcode = https::request("https://www.googleapis.com", "/oauth2/v4/token", "POST", { },
                                    { make_pair("content-type", "application/x-www-form-urlencoded") },
                                    { make_pair("grant_type", "refresh_token"), make_pair("refresh_token", googleOAuth::refreshToken), make_pair("client_id", clientId), make_pair("client_secret", clientSecret) }, //{ make_pair("code", authCode), make_pair("client_id", clientId), make_pair("client_secret", clientSecret), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("grant_type", "authorization_code") },
                                    "", responseHeaders, responseBody);
 
-    googleOAuth::accessToken = responseBody["access_token"].GetString();
-    googleOAuth::expire = time(NULL) + 3600;
+    rapidjson::Document responseJson;
+    rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+    if(!pr) {
+        printf("PARSE ERROR");
+    }
+
+    if(responseJson.IsObject() && responseJson.HasMember("access_token")) {
+        googleOAuth::accessToken = responseJson["access_token"].GetString();
+        googleOAuth::expire = time(NULL) + 3600;
+    } else { throw responseJson; }
 }
 
 const string &googleOAuth::getAuthorizationCode() {

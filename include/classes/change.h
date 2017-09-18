@@ -10,11 +10,44 @@
 #include "classes/file.h"
 #include "teamDrive.h"
 
-class change {
+class change: public jsonObject {
 public:
     change();
+    change(rapidjson::Document &document);
 
-private:
+    string getKind();
+
+    void setKind(string kind);
+
+    string getType();
+
+    void setType(string type);
+
+    time_t getDatetime();
+
+    void setDatetime(time_t datetime);
+
+    bool isRemoved();
+
+    void setRemoved(bool removed);
+
+    string getFileId();
+
+    void setFileId(string fileId);
+
+    file getFile();
+
+    void setFile(file file);
+
+    string getTeamDriveId();
+
+    void setTeamDriveId(string teamDriveId);
+
+    teamDrive getTeamDrive();
+
+    void setTeamDrive(teamDrive teamDrive);
+
+/*private:
     string kind;
     string type;
     time_t datetime;
@@ -22,7 +55,7 @@ private:
     string fileId;
     file file;
     string teamDriveId;
-    teamDrive teamDrive;
+    teamDrive teamDrive;*/
 };
 
 

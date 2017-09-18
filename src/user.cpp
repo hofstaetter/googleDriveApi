@@ -53,8 +53,10 @@ void user::setEmailAddress(string &emailAddress) {
 }
 
 user::user() {
+    this->document = new rapidjson::Document;
 }
 
 user::user(rapidjson::Document &document) {
-    this->document.CopyFrom(document, this->document.GetAllocator());
+    this->document = new rapidjson::Document;
+    (*this->document).CopyFrom(document, (*this->document).GetAllocator());
 }

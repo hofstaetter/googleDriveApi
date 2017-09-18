@@ -9,6 +9,6 @@
 permission::permission() {
 }
 
-permission::permission(rapidjson::Document &doc) {
-    this->document.CopyFrom(document, this->document.GetAllocator());
+permission::permission(rapidjson::Document &document) {
+    (this->document)->CopyFrom(document, (this->document)->GetAllocator());
 }

@@ -6,12 +6,23 @@
 #define PLEXDRIVE_GETSTARTPAGETOKENRESPONSE_H
 
 #include <string>
+#include <document.h>
+#include "jsonObject.h"
 
 using namespace std;
 
-class startPageToken {
-    string kind;
-    string startPageToken;
+class startPageToken: public jsonObject {
+public:
+    string getKind();
+
+    void setKind(string kind);
+
+    string getStartPageToken();
+
+    void setStartPageToken(string startPageToken);
+
+    startPageToken();
+    startPageToken(rapidjson::Document &document);
 };
 
 

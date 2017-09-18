@@ -10,5 +10,5 @@ videoMediaMetadata::videoMediaMetadata() {
 }
 
 videoMediaMetadata::videoMediaMetadata(rapidjson::Document &document) {
-    this->document.CopyFrom(document, this->document.GetAllocator());
+    (this->document)->CopyFrom(document, (this->document)->GetAllocator());
 }

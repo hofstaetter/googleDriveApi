@@ -25,7 +25,7 @@ writeHeaderBuffer(char *ptr, size_t size, size_t nmemb, void *stream)
 }
 
 long
-https::request(string host, string path, string type, map<string, string> querystring, map<string, string> header, map<string, string> postfields, string body, string& responseHeaders, rapidjson::Document& responseBody) {
+https::request(string host, string path, string type, map<string, string> querystring, map<string, string> header, map<string, string> postfields, string body, string& responseHeaders, string& responseBody) {
     CURL *req = curl_easy_init();
 
     //debug
@@ -91,18 +91,16 @@ https::request(string host, string path, string type, map<string, string> querys
         //get http status code
         curl_easy_getinfo(req, CURLINFO_RESPONSE_CODE, &statuscode);
 
-        rapidjson::ParseResult pr = responseBody.Parse(bodyBuffer.c_str());
-        if(!pr) {
-            printf("PARSE ERROR");
-        }
+        responseBody = bodyBuffer;
 
-        responseHeaders.append(headerBuffer);
+        responseHeaders = headerBuffer;
     //}
 
     curl_slist_free_all(headers);
 
     curl_easy_cleanup(req);
 
+    //debug
     cout << bodyBuffer << endl;
 
     bodyBuffer.clear();

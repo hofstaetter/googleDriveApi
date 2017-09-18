@@ -6,15 +6,36 @@
 #define PLEXDRIVE_BACKGROUNDIMAGEFILE_H
 
 #include <string>
+#include <document.h>
+#include "jsonObject.h"
 
 using namespace std;
 
-class backgroundImageFile {
+class backgroundImageFile: public jsonObject {
 public:
-    string id;
+    backgroundImageFile();
+    backgroundImageFile(rapidjson::Document &document);
+
+    string getId();
+
+    void setId(string id);
+
+    float getXCoordinate();
+
+    void setXCoordinate(float xCoordinate);
+
+    float getYCoordinate();
+
+    void setYCoordinate(float yCoordinate);
+
+    float getWidth();
+
+    void setWidth(float width);
+private:
+    /*string id;
     float xCoordinate;
     float yCoordinate;
-    float width;
+    float width;*/
 };
 
 

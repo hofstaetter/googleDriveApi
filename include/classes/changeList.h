@@ -6,16 +6,31 @@
 #define PLEXDRIVE_CHANGESLISTRESPNSE_H
 
 #include <string>
+#include <vector>
 #include "change.h"
 
 using namespace std;
 
-class changeList {
-private:
-    string kind;
-    string nextPageToken;
-    string newStartPageToken;
-    change changes;
+class changeList: public jsonObject {
+public:
+    string getKind();
+
+    void setKind(string kind);
+
+    string getNextPageToken();
+
+    void setNextPageToken(string nextPageToken);
+
+    string getNewStartPageToken();
+
+    void setNewStartPageToken(string newStartPageToken);
+
+    vector<change> getChanges();
+
+    void setChanges(vector<change> changes);
+
+    changeList();
+    changeList(rapidjson::Document &document);
 };
 
 
