@@ -34,7 +34,6 @@ vector<class file> fileList::getFiles() {
     vector<file> docs = this->getObjectArray<file>("files");
 
     for(int i = 0; i < docs.size(); i++) {
-        jsonObject::debugJson((*docs[i].document));
         result.push_back(docs[i]);
     }
 

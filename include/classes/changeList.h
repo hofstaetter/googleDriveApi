@@ -12,8 +12,13 @@
 using namespace std;
 
 class changeList: public jsonObject {
+private:
+    string kind;
+    string nextPageToken;
+    string newStartPageToken;
+    vector<change> changes;
 public:
-    string getKind();
+    /*string getKind();
 
     void setKind(string kind);
 
@@ -27,9 +32,26 @@ public:
 
     vector<change> getChanges();
 
-    void setChanges(vector<change> changes);
+    void setChanges(vector<change> changes);*/
 
     changeList();
+
+    const string &getKind() const;
+
+    void setKind(const string &kind);
+
+    const string &getNextPageToken() const;
+
+    void setNextPageToken(const string &nextPageToken);
+
+    const string &getNewStartPageToken() const;
+
+    void setNewStartPageToken(const string &newStartPageToken);
+
+    const vector<change> &getChanges() const;
+
+    void setChanges(const vector<change> &changes);
+
     changeList(rapidjson::Document &document);
 };
 

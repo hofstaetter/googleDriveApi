@@ -13,9 +13,11 @@ string jsonObject::toString() {
 }
 
 jsonObject::jsonObject() {
+    this->document = new rapidjson::Document;
 }
 
 jsonObject::jsonObject(rapidjson::Document &document) {
+    this->document = new rapidjson::Document;
     (this->document)->CopyFrom(document, (this->document)->GetAllocator());
 }
 

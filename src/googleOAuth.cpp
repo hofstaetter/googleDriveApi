@@ -2,11 +2,13 @@
 // Created by Matthias Hofstätter on 11.09.17.
 //
 
+#include <fstream>
 #include "oauth/googleOAuth.h"
 
 using namespace std;
 
 string googleOAuth::clientId;
+string googleOAuth::clientSecret;
 string googleOAuth::authorizationCode;
 string googleOAuth::refreshToken;
 string googleOAuth::accessToken;
@@ -63,7 +65,7 @@ void googleOAuth::refreshAccessToken(string clientSecret, string grantType, stri
         throw -1;
     }
 
-    if(!googleOAuth::refreshToken.empty() && googleOAuth::expire <= time(NULL)) {
+    if(!googleOAuth::refreshToken.empty() && googleOAuth::expire > time(NULL)) {
         return;
     }
 
@@ -104,13 +106,82 @@ time_t googleOAuth::getExpire() {
 }
 
 void googleOAuth::authenticate() {
+    rapidjson::Document configuration(rapidjson::kObjectType);
+    ifstream file("config.json");
+    if(file.is_open()) {
+        string configurationstring;
+        file >> configurationstring;
+        file.close();
+
+        configuration.Parse(configurationstring.c_str());
+        if (configuration.IsObject()) {
+            if (configuration.HasMember("clientId"))
+                googleOAuth::clientId = configuration["clientId"].GetString();
+            if (configuration.HasMember("clientSecret"))
+                googleOAuth::clientSecret = configuration["clientSecret"].GetString();
+            if (configuration.HasMember("authorizationCode"))
+                googleOAuth::authorizationCode = configuration["authorizationCode"].GetString();
+            if (configuration.HasMember("accessToken"))
+                googleOAuth::accessToken = configuration["accessToken"].GetString();
+            if (configuration.HasMember("refreshToken"))
+                googleOAuth::refreshToken = configuration["refreshToken"].GetString();
+        }
+    }
+
     if(!googleOAuth::getRefreshToken().empty()) { //access token only expired
-        googleOAuth::refreshAccessToken("XI1bBfoU5AXAFq-h5SqSas1M", "refresh_token", googleOAuth::getRefreshToken(), "590194775230-snrhmjb562msv07a5rvg8mj6l5tiiq0i.apps.googleusercontent.com");
+        googleOAuth::refreshAccessToken(googleOAuth::clientSecret, "refresh_token", googleOAuth::getRefreshToken(), googleOAuth::clientId);
     } else {
         if(googleOAuth::getAuthorizationCode().empty()) {
-            googleOAuth::requestAuthorizationCode("590194775230-snrhmjb562msv07a5rvg8mj6l5tiiq0i.apps.googleusercontent.com", "urn:ietf:wg:oauth:2.0:oob", "code", "https://www.googleapis.com/auth/drive", "", "", "", "");
+            printf("Please enter your client ID: ");
+            cin >> googleOAuth::clientId;
+            printf("Please enter your client secret: ");
+            cin >> googleOAuth::clientSecret;
+            googleOAuth::requestAuthorizationCode(googleOAuth::clientId, "urn:ietf:wg:oauth:2.0:oob", "code", "https://www.googleapis.com/auth/drive", "", "", "", "");
         }
-        googleOAuth::requestTokens("590194775230-snrhmjb562msv07a5rvg8mj6l5tiiq0i.apps.googleusercontent.com", "XI1bBfoU5AXAFq-h5SqSas1M");
+        googleOAuth::requestTokens(googleOAuth::clientId, googleOAuth::clientSecret);
     }
+
+    if(googleOAuth::isAuthenticated()) {
+        rapidjson::Document configuration(rapidjson::kObjectType);
+        configuration.AddMember(rapidjson::StringRef("clientId"), rapidjson::StringRef(googleOAuth::clientId.c_str()), configuration.GetAllocator());
+        configuration.AddMember(rapidjson::StringRef("clientSecret"), rapidjson::StringRef(googleOAuth::clientSecret.c_str()), configuration.GetAllocator());
+        configuration.AddMember(rapidjson::StringRef("authorizationCode"), rapidjson::StringRef(googleOAuth::authorizationCode.c_str()), configuration.GetAllocator());
+        configuration.AddMember(rapidjson::StringRef("accessToken"), rapidjson::StringRef(googleOAuth::accessToken.c_str()), configuration.GetAllocator());
+        configuration.AddMember(rapidjson::StringRef("refreshToken"), rapidjson::StringRef(googleOAuth::refreshToken.c_str()), configuration.GetAllocator());
+
+        rapidjson::StringBuffer buffer;
+        rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+        configuration.Accept(writer);
+
+        string configurationstring = buffer.GetString();
+        ofstream file("config.json");
+        file << configurationstring;
+        file.close();
+    }
+}
+
+bool googleOAuth::isAuthenticated() {
+    if(!googleOAuth::accessToken.empty() && googleOAuth::expire > time(NULL)) {
+        string responseHeaders;
+        string responseBody;
+
+        long httpcode = https::request("https://www.googleapis.com", "/oauth2/v3/tokeninfo", "POST", { },
+                                       { make_pair("content-type", "application/x-www-form-urlencoded") },
+                                       { make_pair("access_token", googleOAuth::accessToken) }, //, make_pair("refresh_token", googleOAuth::refreshToken), make_pair("client_id", clientId), make_pair("client_secret", clientSecret) }, //{ make_pair("code", authCode), make_pair("client_id", clientId), make_pair("client_secret", clientSecret), make_pair("redirect_uri", "urn:ietf:wg:oauth:2.0:oob"), make_pair("grant_type", "authorization_code") },
+                                       "", responseHeaders, responseBody);
+
+        rapidjson::Document responseJson;
+        rapidjson::ParseResult pr = responseJson.Parse(responseBody.c_str());
+        if(!pr) {
+            printf("PARSE ERROR");
+        }
+
+        if(responseJson.IsObject() && responseJson.HasMember("azp") && responseJson.HasMember("expires_in")) {
+            if(responseJson["azp"].GetString() != googleOAuth::clientId || atoi(responseJson["expires_in"].GetString()) <= 0) return false;
+        } else { throw responseJson; }
+
+        return true;
+    }
+    return false;
 }
 

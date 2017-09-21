@@ -6,15 +6,247 @@
 #include <vector>
 
 file::file() {
-    this->document = new rapidjson::Document;
+    //this->document = new rapidjson::Document;
 }
 
 file::file(rapidjson::Document& document) {
-    this->document = new rapidjson::Document;
-    (*this->document).CopyFrom(document, (this->document)->GetAllocator());
+    /*this->document = new rapidjson::Document;
+    (*this->document).CopyFrom(document, (this->document)->GetAllocator());*/
+    if(document.HasMember("kind"))
+        this->kind = document["kind"].GetString();
+    if(document.HasMember("id"))
+        this->id = document["id"].GetString();
+    if(document.HasMember("name"))
+        this->name = document["name"].GetString();
+    if(document.HasMember("mimeType"))
+        this->mimeType = document["mimeType"].GetString();
+    if(document.HasMember("description"))
+        this->description = document["description"].GetString();
+    if(document.HasMember("starred"))
+        this->starred = document["starred"].GetBool();
+    if(document.HasMember("trashed"))
+        this->trashed = document["trashed"].GetBool();
+    if(document.HasMember("trashingUser")) {
+        rapidjson::Document d(rapidjson::kObjectType);
+        d.CopyFrom(document["trashingUser"], d.GetAllocator());
+        this->trashingUser = user(d);
+    }
+    if(document.HasMember("trashedTime")) {
+        this->trashedTime = document["trashedTime"].GetString();
+    }
+    if(document.HasMember("parents")) {
+        for(auto &p : document["parents"].GetArray()) {
+            this->parents.push_back(p.GetString());
+        }
+    }
+    if(document.HasMember("properties")) {
+        for(rapidjson::Value::ConstMemberIterator itr = document["properties"].MemberBegin(); itr == document["properties"].MemberEnd(); itr++) {
+            this->properties.insert(make_pair(itr->name.GetString(), itr->value.GetString()));
+        }
+    }
+    if(document.HasMember("appProperties")) {
+        for(rapidjson::Value::ConstMemberIterator itr = document["appProperties"].MemberBegin(); itr == document["appProperties"].MemberEnd(); itr++) {
+            this->appProperties.insert(make_pair(itr->name.GetString(), itr->value.GetString()));
+        }
+    }
+    if(document.HasMember("spaces")) {
+        for(auto &p : document["spaces"].GetArray()) {
+            this->spaces.push_back(p.GetString());
+        }
+    }
+    if(document.HasMember("version"))
+        this->version = stol(document["version"].GetString());
+    if(document.HasMember("webContentLink"))
+        this->webContentLink = document["webContentLink"].GetString();
+    if(document.HasMember("webViewLink"))
+        this->webViewLink = document["webViewLink"].GetString();
+    if(document.HasMember("iconLink"))
+        this->iconLink = document["iconLink"].GetString();
+    if(document.HasMember("hasThumbnail"))
+        this->hasThumbnail = document["hasThumbnail"].GetBool();
+    if(document.HasMember("thumbnailLink"))
+        this->thumbnailLink = document["thumbnailLink"].GetString();
+
+    if(document.HasMember("modifiedTime"))
+        this->modifiedTime = document["modifiedTime"].GetString();
+
+    if(document.HasMember("size"))
+        this->size = stol(document["size"].GetString());
 }
 
-string file::getKind() {
+string &file::getKind() {
+    return kind;
+}
+
+void file::setKind(string &kind) {
+    file::kind = kind;
+}
+
+string &file::getId() {
+    return id;
+}
+
+void file::setId(string &id) {
+    file::id = id;
+}
+
+string &file::getName() {
+    return name;
+}
+
+void file::setName(string &name) {
+    file::name = name;
+}
+
+string &file::getMimeType() {
+    return mimeType;
+}
+
+void file::setMimeType(string &mimeType) {
+    file::mimeType = mimeType;
+}
+
+string &file::getDescription() {
+    return description;
+}
+
+void file::setDescription(string &description) {
+    file::description = description;
+}
+
+bool file::isStarred() {
+    return starred;
+}
+
+void file::setStarred(bool starred) {
+    file::starred = starred;
+}
+
+bool file::isTrashed() {
+    return trashed;
+}
+
+void file::setTrashed(bool trashed) {
+    file::trashed = trashed;
+}
+
+bool file::isExplicitlyTrashed() {
+    return explicitlyTrashed;
+}
+
+void file::setExplicitlyTrashed(bool explicitlyTrashed) {
+    file::explicitlyTrashed = explicitlyTrashed;
+}
+
+user &file::getTrashingUser() {
+    return trashingUser;
+}
+
+void file::setTrashingUser(user &trashingUser) {
+    file::trashingUser = trashingUser;
+}
+
+vector<string> &file::getParents() {
+    return parents;
+}
+
+void file::setParents(vector<string> &parents) {
+    file::parents = parents;
+}
+
+map<string, string> &file::getProperties() {
+    return properties;
+}
+
+void file::setProperties(map<string, string> &properties) {
+    file::properties = properties;
+}
+
+map<string, string> &file::getAppProperties() {
+    return appProperties;
+}
+
+void file::setAppProperties(map<string, string> &appProperties) {
+    file::appProperties = appProperties;
+}
+
+vector<string> &file::getSpaces() {
+    return spaces;
+}
+
+void file::setSpaces(vector<string> &spaces) {
+    file::spaces = spaces;
+}
+
+long file::getVersion() {
+    return version;
+}
+
+void file::setVersion(long version) {
+    file::version = version;
+}
+
+string &file::getWebContentLink() {
+    return webContentLink;
+}
+
+void file::setWebContentLink(string &webContentLink) {
+    file::webContentLink = webContentLink;
+}
+
+string &file::getWebViewLink() {
+    return webViewLink;
+}
+
+void file::setWebViewLink(string &webViewLink) {
+    file::webViewLink = webViewLink;
+}
+
+string &file::getIconLink() {
+    return iconLink;
+}
+
+void file::setIconLink(string &iconLink) {
+    file::iconLink = iconLink;
+}
+
+bool file::isHasThumbnail() {
+    return hasThumbnail;
+}
+
+void file::setHasThumbnail(bool hasThumbnail) {
+    file::hasThumbnail = hasThumbnail;
+}
+
+string &file::getThumbnailLink() {
+    return thumbnailLink;
+}
+
+void file::setThumbnailLink(string &thumbnailLink) {
+    file::thumbnailLink = thumbnailLink;
+}
+
+long file::getSize() {
+    return size;
+}
+
+void file::setSize(long size) {
+    file::size = size;
+}
+
+void file::setTrashedTime(string &trashedTime) {
+    file::trashedTime = trashedTime;
+}
+
+string &file::getModifiedTime() {
+    return modifiedTime;
+}
+
+void file::setModifiedTime(string &modifiedTime) {
+    file::modifiedTime = modifiedTime;
+}
+
+/*string file::getKind() {
     return this->getString("kind");
 }
 
@@ -94,7 +326,7 @@ void file::setTrashedTime(string &trashedTime) {
     this->setString("trashedTime", trashedTime);
 }
 
-/*vector<string> file::getParents() {
+vector<string> file::getParents() {
     return this->getStringArray("parents");
 }
 
@@ -124,7 +356,7 @@ vector<string> file::getSpaces() {
 
 void file::setSpaces(vector<string> &spaces) {
     this->setStringArray("spaces", spaces);
-}*/
+}
 
 long file::getVersion() {
     return this->getLong("version");
@@ -246,7 +478,7 @@ void file::setSharingUser(user sharingUser) {
     this->setObject("sharingUser", sharingUser);
 }
 
-/*vector<user> file::getOwners() {
+vector<user> file::getOwners() {
     vector<user> result;
     vector<rapidjson::Document> vec = this->getObjectArray("owners");
     for(auto &d : ) {
@@ -261,7 +493,7 @@ void file::setOwners(vector<user> &owners) {
         v.push_back(u.document);
     }
     this->setObjectArray("owners", v);
-}*/
+}
 
 string file::getTeamDriveId() {
     return this->getString("teamDriveId");
@@ -319,7 +551,7 @@ void file::setWritersCanShare(bool writersCanShare) {
     this->setBool("writersCanShare", writersCanShare);
 }
 
-/*vector<permission> file::getPermissions() {
+vector<permission> file::getPermissions() {
     vector<permission> result;
     for(auto d : this->getObjectArray("permissions")) {
         result.push_back(permission(d));
@@ -333,7 +565,7 @@ void file::setPermissions(vector<permission> &permissions) {
         v.push_back(p.document);
     }
     this->setObjectArray("permissions", v);
-}*/
+}
 
 bool file::isHasAugmentedPermissions() {
     return this->getBool("hasAugmentedPermissions");
@@ -429,4 +661,4 @@ bool file::isIsAppAuthorized() {
 
 void file::setIsAppAuthorized(bool isAppAuthorized) {
     this->setBool("isAppAuthorized", isAppAuthorized);
-}
+}*/

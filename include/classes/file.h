@@ -22,17 +22,47 @@
 
 using namespace std;
 
-/*class teamDrivePermissionDetail {
-public:
-    std::string teamDrivePermissionType;
-    std::string role;
-    std::string inheritedFrom;
-    bool inherited;
-};*/
-
 class file: public jsonObject {
+private:
+    string kind;
+    string id;
+    string name;
+    string mimeType;
+    string description;
+    bool starred;
+    bool trashed;
+    bool explicitlyTrashed;
+    user trashingUser;
+    string trashedTime;
+    vector<string> parents;
+    map<string, string> properties;
+    map<string, string> appProperties;
+    vector<string> spaces;
+    long version;
+    string webContentLink;
+    string webViewLink;
+    string iconLink;
+    bool hasThumbnail;
+    string thumbnailLink;
+    //TODO
+    string modifiedTime;
+    //TODO
+    long size;
+    //TODO
 public:
-    string getKind();
+    void setTrashedTime(string &trashedTime);
+
+    string &getModifiedTime();
+
+    void setModifiedTime(string &modifiedTime);
+
+public:
+    long getSize();
+
+    void setSize(long size);
+    //TODO
+public:
+    /*string getKind();
 
     void setKind(string &kind);
 
@@ -72,7 +102,7 @@ public:
 
     void setTrashedTime(string &trashedTime);
 
-    /*vector<string> getParents();
+    vector<string> getParents();
 
     void setParents(vector<string> &parents);
 
@@ -86,7 +116,7 @@ public:
 
     vector<string> getSpaces();
 
-    void setSpaces(vector<string> &spaces);*/
+    void setSpaces(vector<string> &spaces);
 
     long getVersion();
 
@@ -148,9 +178,9 @@ public:
 
     void setSharingUser(user sharingUser);
 
-    /*vector<user> getOwners();
+    vector<user> getOwners();
 
-    void setOwners(vector<user> &owners);*/
+    void setOwners(vector<user> &owners);
 
     string getTeamDriveId();
 
@@ -180,9 +210,9 @@ public:
 
     void setWritersCanShare(bool writersCanShare);
 
-    /*vector<permission> getPermissions();
+    vector<permission> getPermissions();
 
-    void setPermissions(vector<permission> &permissions);*/
+    void setPermissions(vector<permission> &permissions);
 
     bool isHasAugmentedPermissions();
 
@@ -232,9 +262,90 @@ public:
 
     void setIsAppAuthorized(bool isAppAuthorized);
 
-    bool isAppAuthorized;
+    bool isAppAuthorized;*/
 
     file();
+
+    string &getKind();
+
+    void setKind(string &kind);
+
+    string &getId();
+
+    void setId(string &id);
+
+    string &getName();
+
+    void setName(string &name);
+
+    string &getMimeType();
+
+    void setMimeType(string &mimeType);
+
+    string &getDescription();
+
+    void setDescription(string &description);
+
+    bool isStarred();
+
+    void setStarred(bool starred);
+
+    bool isTrashed();
+
+    void setTrashed(bool trashed);
+
+    bool isExplicitlyTrashed();
+
+    void setExplicitlyTrashed(bool explicitlyTrashed);
+
+    user &getTrashingUser();
+
+    void setTrashingUser(user &trashingUser);
+
+    time_t getTrashedTime();
+
+    void setTrashedTime(time_t trashedTime);
+
+    vector<string> &getParents();
+
+    void setParents(vector<string> &parents);
+
+    map<string, string> &getProperties();
+
+    void setProperties(map<string, string> &properties);
+
+    map<string, string> &getAppProperties();
+
+    void setAppProperties(map<string, string> &appProperties);
+
+    vector<string> &getSpaces();
+
+    void setSpaces(vector<string> &spaces);
+
+    long getVersion();
+
+    void setVersion(long version);
+
+    string &getWebContentLink();
+
+    void setWebContentLink(string &webContentLink);
+
+    string &getWebViewLink();
+
+    void setWebViewLink(string &webViewLink);
+
+    string &getIconLink();
+
+    void setIconLink(string &iconLink);
+
+    bool isHasThumbnail();
+
+    void setHasThumbnail(bool hasThumbnail);
+
+    string &getThumbnailLink();
+
+    void setThumbnailLink(string &thumbnailLink);
+
     file(rapidjson::Document& document);
 };
 

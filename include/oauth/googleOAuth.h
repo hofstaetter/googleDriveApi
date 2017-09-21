@@ -27,6 +27,7 @@ public:
     static void requestTokens(string clientId, string clientSecret);
     static void refreshAccessToken(string clientSecret, string grantType, string refreshToken, string clientId);
     static void authenticate();
+    static bool isAuthenticated();
 private:
     static string clientId;
     static string clientSecret;

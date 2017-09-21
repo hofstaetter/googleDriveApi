@@ -14,14 +14,23 @@ class change: public jsonObject {
 public:
     change();
     change(rapidjson::Document &document);
+private:
+    string kind;
+    string type;
+    time_t datetime;
+    bool removed;
+    string fileId;
+    class file file;
+    string teamDriveId;
+    class teamDrive teamDrive;
+public:
+    string &getKind();
 
-    string getKind();
+    void setKind(string &kind);
 
-    void setKind(string kind);
+    string &getType();
 
-    string getType();
-
-    void setType(string type);
+    void setType(string &type);
 
     time_t getDatetime();
 
@@ -31,31 +40,21 @@ public:
 
     void setRemoved(bool removed);
 
-    string getFileId();
+    string &getFileId();
 
-    void setFileId(string fileId);
+    void setFileId(string &fileId);
 
-    file getFile();
+    class file &getFile();
 
-    void setFile(file file);
+    void setFile(class file file);
 
-    string getTeamDriveId();
+    string &getTeamDriveId();
 
-    void setTeamDriveId(string teamDriveId);
+    void setTeamDriveId(string &teamDriveId);
 
-    teamDrive getTeamDrive();
+    class teamDrive &getTeamDrive();
 
-    void setTeamDrive(teamDrive teamDrive);
-
-/*private:
-    string kind;
-    string type;
-    time_t datetime;
-    bool removed;
-    string fileId;
-    file file;
-    string teamDriveId;
-    teamDrive teamDrive;*/
+    void setTeamDrive(class teamDrive teamDrive);
 };
 
 
