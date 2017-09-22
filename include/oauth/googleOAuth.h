@@ -8,24 +8,15 @@
 #include <string>
 #include <rapidjson.h>
 #include <document.h>
-#include "files/files.h"
-#include "classes/https.h"
+#include <files/Files.h>
+#include <global/ApiClient.h>
 
 using namespace std;
 
-class googleOAuth {
+class GoogleOAuth {
 public:
-    static const string &getAuthorizationCode();
+    static string &getAccessToken();
 
-    static const string &getRefreshToken();
-
-    static const string &getAccessToken();
-
-    static time_t getExpire();
-
-    static void requestAuthorizationCode(string clientId, string redirectUri, string responseType, string scope, string state, string includeGrantedScopes, string loginHint, string prompt);
-    static void requestTokens(string clientId, string clientSecret);
-    static void refreshAccessToken(string clientSecret, string grantType, string refreshToken, string clientId);
     static void authenticate();
     static bool isAuthenticated();
 private:
@@ -35,6 +26,10 @@ private:
     static string refreshToken;
     static string accessToken;
     static time_t expire;
+
+    static void requestAuthorizationCode(string clientId, string redirectUri, string responseType, string scope, string state, string includeGrantedScopes, string loginHint, string prompt);
+    static void requestTokens(string clientId, string clientSecret);
+    static void refreshAccessToken(string clientSecret, string grantType, string refreshToken, string clientId);
 };
 
 

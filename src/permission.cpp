@@ -3,12 +3,10 @@
 //
 
 #include <document.h>
-#include <classes/jsonObject.h>
-#include "classes/permission.h"
+#include <permissions/Permission.h>
 
-permission::permission() {
+Permission::Permission() {
 }
 
-permission::permission(rapidjson::Document &document) {
-    (this->document)->CopyFrom(document, (this->document)->GetAllocator());
+Permission::Permission(rapidjson::Document &document) {
 }

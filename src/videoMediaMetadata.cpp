@@ -3,12 +3,10 @@
 //
 
 #include <document.h>
-#include <classes/jsonObject.h>
-#include "classes/videoMediaMetadata.h"
+#include "files/VideoMediaMetadata.h"
 
-videoMediaMetadata::videoMediaMetadata() {
+VideoMediaMetadata::VideoMediaMetadata() {
 }
 
-videoMediaMetadata::videoMediaMetadata(rapidjson::Document &document) {
-    (this->document)->CopyFrom(document, (this->document)->GetAllocator());
+VideoMediaMetadata::VideoMediaMetadata(rapidjson::Document &document) {
 }

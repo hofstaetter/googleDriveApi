@@ -5,7 +5,7 @@
 #ifndef PLEXDRIVE_GOOGLEDRIVEAPI_H
 #define PLEXDRIVE_GOOGLEDRIVEAPI_H
 
-class googleDriveApi {
+class GoogleDriveApi {
 };
 
 

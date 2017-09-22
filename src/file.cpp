@@ -2,14 +2,15 @@
 // Created by Matthias Hofstätter on 21.08.17.
 //
 
-#include "classes/file.h"
+#include "files/File.h"
+#include "document.h"
 #include <vector>
 
-file::file() {
+File::File() {
     //this->document = new rapidjson::Document;
 }
 
-file::file(rapidjson::Document& document) {
+File::File(rapidjson::Document& document) {
     /*this->document = new rapidjson::Document;
     (*this->document).CopyFrom(document, (this->document)->GetAllocator());*/
     if(document.HasMember("kind"))
@@ -29,7 +30,7 @@ file::file(rapidjson::Document& document) {
     if(document.HasMember("trashingUser")) {
         rapidjson::Document d(rapidjson::kObjectType);
         d.CopyFrom(document["trashingUser"], d.GetAllocator());
-        this->trashingUser = user(d);
+        this->trashingUser = User(d);
     }
     if(document.HasMember("trashedTime")) {
         this->trashedTime = document["trashedTime"].GetString();
@@ -74,591 +75,644 @@ file::file(rapidjson::Document& document) {
         this->size = stol(document["size"].GetString());
 }
 
-string &file::getKind() {
+string &File::getKind() {
     return kind;
 }
 
-void file::setKind(string &kind) {
-    file::kind = kind;
+void File::setKind(string &kind) {
+    File::kind = kind;
 }
 
-string &file::getId() {
+string &File::getId() {
     return id;
 }
 
-void file::setId(string &id) {
-    file::id = id;
+void File::setId(string &id) {
+    File::id = id;
 }
 
-string &file::getName() {
+string &File::getName() {
     return name;
 }
 
-void file::setName(string &name) {
-    file::name = name;
+void File::setName(string &name) {
+    File::name = name;
 }
 
-string &file::getMimeType() {
+string &File::getMimeType() {
     return mimeType;
 }
 
-void file::setMimeType(string &mimeType) {
-    file::mimeType = mimeType;
+void File::setMimeType(string &mimeType) {
+    File::mimeType = mimeType;
 }
 
-string &file::getDescription() {
+string &File::getDescription() {
     return description;
 }
 
-void file::setDescription(string &description) {
-    file::description = description;
+void File::setDescription(string &description) {
+    File::description = description;
 }
 
-bool file::isStarred() {
+bool File::isStarred() {
     return starred;
 }
 
-void file::setStarred(bool starred) {
-    file::starred = starred;
+void File::setStarred(bool starred) {
+    File::starred = starred;
 }
 
-bool file::isTrashed() {
+bool File::isTrashed() {
     return trashed;
 }
 
-void file::setTrashed(bool trashed) {
-    file::trashed = trashed;
+void File::setTrashed(bool trashed) {
+    File::trashed = trashed;
 }
 
-bool file::isExplicitlyTrashed() {
+bool File::isExplicitlyTrashed() {
     return explicitlyTrashed;
 }
 
-void file::setExplicitlyTrashed(bool explicitlyTrashed) {
-    file::explicitlyTrashed = explicitlyTrashed;
+void File::setExplicitlyTrashed(bool explicitlyTrashed) {
+    File::explicitlyTrashed = explicitlyTrashed;
 }
 
-user &file::getTrashingUser() {
+User &File::getTrashingUser() {
     return trashingUser;
 }
 
-void file::setTrashingUser(user &trashingUser) {
-    file::trashingUser = trashingUser;
+void File::setTrashingUser(User &trashingUser) {
+    File::trashingUser = trashingUser;
 }
 
-vector<string> &file::getParents() {
+vector<string> &File::getParents() {
     return parents;
 }
 
-void file::setParents(vector<string> &parents) {
-    file::parents = parents;
+void File::setParents(vector<string> &parents) {
+    File::parents = parents;
 }
 
-map<string, string> &file::getProperties() {
+map<string, string> &File::getProperties() {
     return properties;
 }
 
-void file::setProperties(map<string, string> &properties) {
-    file::properties = properties;
+void File::setProperties(map<string, string> &properties) {
+    File::properties = properties;
 }
 
-map<string, string> &file::getAppProperties() {
+map<string, string> &File::getAppProperties() {
     return appProperties;
 }
 
-void file::setAppProperties(map<string, string> &appProperties) {
-    file::appProperties = appProperties;
+void File::setAppProperties(map<string, string> &appProperties) {
+    File::appProperties = appProperties;
 }
 
-vector<string> &file::getSpaces() {
+vector<string> &File::getSpaces() {
     return spaces;
 }
 
-void file::setSpaces(vector<string> &spaces) {
-    file::spaces = spaces;
+void File::setSpaces(vector<string> &spaces) {
+    File::spaces = spaces;
 }
 
-long file::getVersion() {
+long File::getVersion() {
     return version;
 }
 
-void file::setVersion(long version) {
-    file::version = version;
+void File::setVersion(long version) {
+    File::version = version;
 }
 
-string &file::getWebContentLink() {
+string &File::getWebContentLink() {
     return webContentLink;
 }
 
-void file::setWebContentLink(string &webContentLink) {
-    file::webContentLink = webContentLink;
+void File::setWebContentLink(string &webContentLink) {
+    File::webContentLink = webContentLink;
 }
 
-string &file::getWebViewLink() {
+string &File::getWebViewLink() {
     return webViewLink;
 }
 
-void file::setWebViewLink(string &webViewLink) {
-    file::webViewLink = webViewLink;
+void File::setWebViewLink(string &webViewLink) {
+    File::webViewLink = webViewLink;
 }
 
-string &file::getIconLink() {
+string &File::getIconLink() {
     return iconLink;
 }
 
-void file::setIconLink(string &iconLink) {
-    file::iconLink = iconLink;
+void File::setIconLink(string &iconLink) {
+    File::iconLink = iconLink;
 }
 
-bool file::isHasThumbnail() {
+bool File::isHasThumbnail() {
     return hasThumbnail;
 }
 
-void file::setHasThumbnail(bool hasThumbnail) {
-    file::hasThumbnail = hasThumbnail;
+void File::setHasThumbnail(bool hasThumbnail) {
+    File::hasThumbnail = hasThumbnail;
 }
 
-string &file::getThumbnailLink() {
+string &File::getThumbnailLink() {
     return thumbnailLink;
 }
 
-void file::setThumbnailLink(string &thumbnailLink) {
-    file::thumbnailLink = thumbnailLink;
+void File::setThumbnailLink(string &thumbnailLink) {
+    File::thumbnailLink = thumbnailLink;
 }
 
-long file::getSize() {
+long File::getSize() {
     return size;
 }
 
-void file::setSize(long size) {
-    file::size = size;
+void File::setSize(long size) {
+    File::size = size;
 }
 
-void file::setTrashedTime(string &trashedTime) {
-    file::trashedTime = trashedTime;
-}
-
-string &file::getModifiedTime() {
+string &File::getModifiedTime() {
     return modifiedTime;
 }
 
-void file::setModifiedTime(string &modifiedTime) {
-    file::modifiedTime = modifiedTime;
+void File::setModifiedTime(string &modifiedTime) {
+    File::modifiedTime = modifiedTime;
 }
 
-/*string file::getKind() {
+string &File::toString() {
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    this->toJSON().Accept(writer);
+
+    string result(buffer.GetString());
+    return result;
+}
+
+rapidjson::Document &File::toJSON() {
+    rapidjson::Document d(rapidjson::kObjectType);
+
+    d.AddMember(rapidjson::StringRef("kind"), rapidjson::StringRef(this->kind.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("id"), rapidjson::StringRef(this->id.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("name"), rapidjson::StringRef(this->name.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("mimeType"), rapidjson::StringRef(this->mimeType.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("description"), rapidjson::StringRef(this->description.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("starred"), rapidjson::Value(this->starred), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("trashed"), rapidjson::Value(this->trashed), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("explicitlyTrashed"), rapidjson::Value(this->explicitlyTrashed), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("trashingUser"), this->trashingUser.toJSON(), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("trashedTime"), rapidjson::StringRef(this->trashedTime.c_str()), d.GetAllocator());
+    rapidjson::Value i(rapidjson::kArrayType);
+    for(string &s : this->parents) {
+        i.PushBack(rapidjson::StringRef(s.c_str()), d.GetAllocator());
+    }
+    d.AddMember(rapidjson::StringRef("parents"), i, d.GetAllocator());
+    rapidjson::Value j(rapidjson::kObjectType);
+    for(map<string, string>::iterator it = this->properties.begin(); it != this->properties.end(); ++it) {
+        j.AddMember(rapidjson::StringRef(it->first.c_str()), rapidjson::StringRef(it->second.c_str()), d.GetAllocator());
+    }
+    d.AddMember(rapidjson::StringRef("properties"), j, d.GetAllocator());
+    rapidjson::Value k(rapidjson::kObjectType);
+    for(map<string, string>::iterator it = this->appProperties.begin(); it != this->appProperties.end(); ++it) {
+        k.AddMember(rapidjson::StringRef(it->first.c_str()), rapidjson::StringRef(it->second.c_str()), d.GetAllocator());
+    }
+    d.AddMember(rapidjson::StringRef("appProperties"), k, d.GetAllocator());
+    rapidjson::Value l(rapidjson::kArrayType);
+    for(string &s : this->spaces) {
+        l.PushBack(rapidjson::StringRef(s.c_str()), d.GetAllocator());
+    }
+    d.AddMember(rapidjson::StringRef("spaces"), l, d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("version"), rapidjson::Value((uint64_t)this->version), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("webContentLink"), rapidjson::StringRef(this->webContentLink.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("webViewLink"), rapidjson::StringRef(this->webViewLink.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("iconLink"), rapidjson::StringRef(this->iconLink.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("hasThumbnail"), rapidjson::Value(this->hasThumbnail), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("trashedTime"), rapidjson::StringRef(this->trashedTime.c_str()), d.GetAllocator());
+    //TODO
+    d.AddMember(rapidjson::StringRef("modifiedTime"), rapidjson::StringRef(this->modifiedTime.c_str()), d.GetAllocator());
+    //TODO
+    d.AddMember(rapidjson::StringRef("size"), rapidjson::Value((uint64_t)this->size), d.GetAllocator());
+    //TODO
+
+    return d;
+}
+
+/*string File::getKind() {
     return this->getString("kind");
 }
 
-void file::setKind(string &kind) {
+void File::setKind(string &kind) {
     this->setString("kind", kind);
 }
 
-string file::getId() {
+string File::getId() {
     return this->getString("id");
 }
 
-void file::setId(string &id) {
+void File::setId(string &id) {
     this->setString("id", id);
 }
 
-string file::getName() {
+string File::getName() {
     return this->getString("name");
 }
 
-void file::setName(string &name) {
+void File::setName(string &name) {
     this->setString("name", name);
 }
 
-string file::getMimeType() {
+string File::getMimeType() {
     return this->getString("mimeType");
 }
 
-void file::setMimeType(string &mimeType) {
+void File::setMimeType(string &mimeType) {
     this->setString("mimeType", mimeType);
 }
 
-string file::getDescription() {
+string File::getDescription() {
     return this->getString("description");
 }
 
-void file::setDescription(string &description) {
+void File::setDescription(string &description) {
     this->setString("description", description);
 }
 
-bool file::isStarred() {
+bool File::isStarred() {
     return this->getBool("starred");
 }
 
-void file::setStarred(bool starred) {
+void File::setStarred(bool starred) {
     this->setBool("starred", starred);
 }
 
-bool file::isTrashed() {
+bool File::isTrashed() {
     return this->getBool("trashed");
 }
 
-void file::setTrashed(bool trashed) {
+void File::setTrashed(bool trashed) {
     this->setBool("trashed", trashed);
 }
 
-bool file::isExplicitlyTrashed() {
+bool File::isExplicitlyTrashed() {
     return this->getBool("explicitlyTrashed");
 }
 
-void file::setExplicitlyTrashed(bool explicitlyTrashed) {
+void File::setExplicitlyTrashed(bool explicitlyTrashed) {
     this->setBool("explicitlyTrashed", explicitlyTrashed);
 }
 
-user file::getTrashingUser() {
-    return this->getObject<user>("trashingUser");
+User File::getTrashingUser() {
+    return this->getObject<User>("trashingUser");
 }
 
-void file::setTrashingUser(user trashingUser) {
+void File::setTrashingUser(User trashingUser) {
     this->setObject("trashingUser", trashingUser);
 }
 
-string file::getTrashedTime() {
+string File::getTrashedTime() {
     return this->getString("trashedTime");
 }
 
-void file::setTrashedTime(string &trashedTime) {
+void File::setTrashedTime(string &trashedTime) {
     this->setString("trashedTime", trashedTime);
 }
 
-vector<string> file::getParents() {
+vector<string> File::getParents() {
     return this->getStringArray("parents");
 }
 
-void file::setParents(vector<string> &parents) {
+void File::setParents(vector<string> &parents) {
     this->setStringArray("parents", parents);
 }
 
-map<string, string> file::getProperties() {
+map<string, string> File::getProperties() {
     return this->getStringMap("properties");
 }
 
-void file::setProperties(map<string, string> &properties) {
+void File::setProperties(map<string, string> &properties) {
     this->setStringMap("properties", properties);
 }
 
-map<string, string> file::getAppProperties() {
+map<string, string> File::getAppProperties() {
     return this->getStringMap("appProperties");
 }
 
-void file::setAppProperties(map<string, string> &appProperties) {
+void File::setAppProperties(map<string, string> &appProperties) {
     this->setStringMap("appProperties", appProperties);
 }
 
-vector<string> file::getSpaces() {
+vector<string> File::getSpaces() {
     return this->getStringArray("spaces");
 }
 
-void file::setSpaces(vector<string> &spaces) {
+void File::setSpaces(vector<string> &spaces) {
     this->setStringArray("spaces", spaces);
 }
 
-long file::getVersion() {
+long File::getVersion() {
     return this->getLong("version");
 }
 
-void file::setVersion(long version) {
+void File::setVersion(long version) {
     this->setLong("version", version);
 }
 
-string file::getWebContentLink() {
+string File::getWebContentLink() {
     return this->getString("webContentLink");
 }
 
-void file::setWebContentLink(string &webContentLink) {
+void File::setWebContentLink(string &webContentLink) {
     this->setString("webContentLink", webContentLink);
 }
 
-string file::getWebViewLink() {
+string File::getWebViewLink() {
     return this->getString("webViewLink");
 }
 
-void file::setWebViewLink(string &webViewLink) {
+void File::setWebViewLink(string &webViewLink) {
     this->setString("webViewLink", webViewLink);
 }
 
-string file::getIconLink() {
+string File::getIconLink() {
     return this->getString("iconLink");
 }
 
-void file::setIconLink(string &iconLink) {
+void File::setIconLink(string &iconLink) {
     this->setString("iconLink", iconLink);
 }
 
-bool file::isHasThumbnail() {
+bool File::isHasThumbnail() {
     return this->getBool("hasThumbnail");
 }
 
-void file::setHasThumbnail(bool hasThumbnail) {
+void File::setHasThumbnail(bool hasThumbnail) {
     this->setBool("hasThumbnail", hasThumbnail);
 }
 
-string file::getThumbneilLink() {
+string File::getThumbneilLink() {
     return this->getString("thumbneilLink");
 }
 
-void file::setThumbneilLink(string &thumbneilLink) {
+void File::setThumbneilLink(string &thumbneilLink) {
     this->setString("thumbneilLink", thumbneilLink);
 }
 
-long file::getThumbneilVersion() {
+long File::getThumbneilVersion() {
     return this->getLong("thumbneilVersion");
 }
 
-void file::setThumbneilVersion(long thumbneilVersion) {
+void File::setThumbneilVersion(long thumbneilVersion) {
     this->setLong("thumbneilVersion", thumbneilVersion);
 }
 
-bool file::isViewedByMe() {
+bool File::isViewedByMe() {
     return this->getBool("viewedByMe");
 }
 
-void file::setViewedByMe(bool viewedByMe) {
+void File::setViewedByMe(bool viewedByMe) {
     this->setBool("viewedByMe", viewedByMe);
 }
 
-string file::getViewedByMeTime() {
+string File::getViewedByMeTime() {
     return this->getString("viewedByMeTime");
 }
 
-void file::setViewedByMeTime(string &viewedByMeTime) {
+void File::setViewedByMeTime(string &viewedByMeTime) {
     this->setString("viewedByMeTime", viewedByMeTime);
 }
 
-string file::getCreatedTime() {
+string File::getCreatedTime() {
     return this->getString("createdTime");
 }
 
-void file::setCreatedTime(string &createdTime) {
+void File::setCreatedTime(string &createdTime) {
     this->setString("createdTime", createdTime);
 }
 
-string file::getModifiedTime() {
+string File::getModifiedTime() {
     return this->getString("modifiedTime");
 }
 
-void file::setModifiedTime(string &modifiedTime) {
+void File::setModifiedTime(string &modifiedTime) {
     this->setString("modifiedTime", modifiedTime);
 }
 
-string file::getModifiedByMeTime() {
+string File::getModifiedByMeTime() {
     return this->getString("modifiedByMeTime");
 }
 
-void file::setModifiedByMeTime(string &modifiedByMeTime) {
+void File::setModifiedByMeTime(string &modifiedByMeTime) {
     this->setString("modifiedByMeTime", modifiedByMeTime);
 }
 
-bool file::isModifiedByMe() {
+bool File::isModifiedByMe() {
     return this->getBool("modifiedByMe");
 }
 
-void file::setModifiedByMe(bool modifiedByMe) {
+void File::setModifiedByMe(bool modifiedByMe) {
     this->setBool("modifiedByMe", modifiedByMe);
 }
 
-string file::getSharedWithMeTime() {
+string File::getSharedWithMeTime() {
     return this->getString("sharedWithMeTime");
 }
 
-void file::setSharedWithMeTime(string &sharedWithMeTime) {
+void File::setSharedWithMeTime(string &sharedWithMeTime) {
     this->setString("sharedWithMeTime", sharedWithMeTime);
 }
 
-user file::getSharingUser() {
-    return user(this->getObject<user>("sharingUser"));
+User File::getSharingUser() {
+    return User(this->getObject<User>("sharingUser"));
 }
 
-void file::setSharingUser(user sharingUser) {
+void File::setSharingUser(User sharingUser) {
     this->setObject("sharingUser", sharingUser);
 }
 
-vector<user> file::getOwners() {
-    vector<user> result;
+vector<User> File::getOwners() {
+    vector<User> result;
     vector<rapidjson::Document> vec = this->getObjectArray("owners");
     for(auto &d : ) {
-        result.push_back(user(d));
+        result.push_back(User(d));
     }
     return result;
 }
 
-void file::setOwners(vector<user> &owners) {
+void File::setOwners(vector<User> &owners) {
     std::vector<rapidjson::Document> v;
-    for(user &u : owners) {
+    for(User &u : owners) {
         v.push_back(u.document);
     }
     this->setObjectArray("owners", v);
 }
 
-string file::getTeamDriveId() {
+string File::getTeamDriveId() {
     return this->getString("teamDriveId");
 }
 
-void file::setTeamDriveId(string &teamDriveId) {
+void File::setTeamDriveId(string &teamDriveId) {
     this->setString("teamDriveId", teamDriveId);
 }
 
-user file::getLastModifyingUser() {
-    return this->getObject<user>("lastModifyingUser");
+User File::getLastModifyingUser() {
+    return this->getObject<User>("lastModifyingUser");
 }
 
-void file::setLastModifyingUser(user &lastModifyingUser) {
+void File::setLastModifyingUser(User &lastModifyingUser) {
     this->setObject("lastModifyingUser", lastModifyingUser);
 }
 
-bool file::isShared() {
+bool File::isShared() {
     return this->getBool("shared");
 }
 
-void file::setShared(bool shared) {
+void File::setShared(bool shared) {
     this->setBool("shared", shared);
 }
 
-bool file::isOwnedByMe() {
+bool File::isOwnedByMe() {
     return this->getBool("ownedByMe");
 }
 
-void file::setOwnedByMe(bool ownedByMe) {
+void File::setOwnedByMe(bool ownedByMe) {
     this->setBool("ownedByMe", ownedByMe);
 }
 
-capabilities file::getCapabilities() {
-    return this->getObject<capabilities>("capabilities");
+Capabilities File::getCapabilities() {
+    return this->getObject<Capabilities>("Capabilities");
 }
 
-void file::setCapabilities(class capabilities &capabilities) {
-    this->setObject("capabilities", capabilities);
+void File::setCapabilities(class Capabilities &Capabilities) {
+    this->setObject("Capabilities", Capabilities);
 }
 
-bool file::isViewersCanCopyContent() {
+bool File::isViewersCanCopyContent() {
     return this->getBool("viewersCanCopyContent");
 }
 
-void file::setViewersCanCopyContent(bool viewersCanCopyContent) {
+void File::setViewersCanCopyContent(bool viewersCanCopyContent) {
     this->setBool("viewersCanCopyContent", viewersCanCopyContent);
 }
 
-bool file::isWritersCanShare() {
+bool File::isWritersCanShare() {
     return this->getBool("writersCanShare");
 }
 
-void file::setWritersCanShare(bool writersCanShare) {
+void File::setWritersCanShare(bool writersCanShare) {
     this->setBool("writersCanShare", writersCanShare);
 }
 
-vector<permission> file::getPermissions() {
-    vector<permission> result;
-    for(auto d : this->getObjectArray("permissions")) {
-        result.push_back(permission(d));
+vector<Permission> File::getPermissions() {
+    vector<Permission> result;
+    for(auto d : this->getObjectArray("Permissions")) {
+        result.push_back(Permission(d));
     }
     return result;
 }
 
-void file::setPermissions(vector<permission> &permissions) {
+void File::setPermissions(vector<Permission> &Permissions) {
     vector<rapidjson::Document> v;
-    for(permission &p : permissions) {
+    for(Permission &p : Permissions) {
         v.push_back(p.document);
     }
-    this->setObjectArray("permissions", v);
+    this->setObjectArray("Permissions", v);
 }
 
-bool file::isHasAugmentedPermissions() {
+bool File::isHasAugmentedPermissions() {
     return this->getBool("hasAugmentedPermissions");
 }
 
-void file::setHasAugmentedPermissions(bool hasAugmentedPermissions) {
+void File::setHasAugmentedPermissions(bool hasAugmentedPermissions) {
     this->setBool("hasAugmentedPermissions", hasAugmentedPermissions);
 }
 
-string file::getFolderColorRgb() {
+string File::getFolderColorRgb() {
     return this->getString("folderColorRgb");
 }
 
-void file::setFolderColorRgb(string &folderColorRgb) {
+void File::setFolderColorRgb(string &folderColorRgb) {
     this->setString("folderColorRgb", folderColorRgb);
 }
 
-string file::getOriginalFilename() {
+string File::getOriginalFilename() {
     return this->getString("riginalFilename");
 }
 
-void file::setOriginalFilename(string &originalFilename) {
+void File::setOriginalFilename(string &originalFilename) {
     this->setString("riginalFilename", originalFilename);
 }
 
-string file::getFullFileExtension() {
+string File::getFullFileExtension() {
     return this->getString("fullFileExtension");
 }
 
-void file::setFullFileExtension(string &fullFileExtension) {
+void File::setFullFileExtension(string &fullFileExtension) {
     this->setString("fullFileExtension", fullFileExtension);
 }
 
-string file::getFileExtension() {
+string File::getFileExtension() {
     return this->getString("fileExtension");
 }
 
-void file::setFileExtension(string &fileExtension) {
+void File::setFileExtension(string &fileExtension) {
     this->setString("fileExtension", fileExtension);
 }
 
-string file::getMd5Checksum() {
+string File::getMd5Checksum() {
     return this->getString("md5Checksum");
 }
 
-void file::setMd5Checksum(string &md5Checksum) {
+void File::setMd5Checksum(string &md5Checksum) {
     this->setString("md5Checksum", md5Checksum);
 }
 
-long file::getSize() {
+long File::getSize() {
     return this->getLong("size");
 }
 
-void file::setSize(long size) {
+void File::setSize(long size) {
     this->setLong("size", size);
 }
 
-long file::getQuotaBytesUser() {
+long File::getQuotaBytesUser() {
     return this->getLong("quotaBytesUser");
 }
 
-void file::setQuotaBytesUser(long quotaBytesUser) {
+void File::setQuotaBytesUser(long quotaBytesUser) {
     this->setLong("quotaBytesUser", quotaBytesUser);
 }
 
-string file::getHeadRevisionId() {
+string File::getHeadRevisionId() {
     return this->getString("headRevisionId");
 }
 
-void file::setHeadRevisionId(string &headRevisionId) {
+void File::setHeadRevisionId(string &headRevisionId) {
     this->setString("headRevisionId", headRevisionId);
 }
 
-imageMediaMetadata file::getImageMediaMetadata() {
-    return this->getObject<imageMediaMetadata>("imageMediaMetadata");
+ImageMediaMetadata File::getImageMediaMetadata() {
+    return this->getObject<ImageMediaMetadata>("ImageMediaMetadata");
 }
 
-void file::setImageMediaMetadata(class imageMediaMetadata &imageMediaMetadata) {
-    this->setObject("imageMediaMetadata", imageMediaMetadata);
+void File::setImageMediaMetadata(class ImageMediaMetadata &ImageMediaMetadata) {
+    this->setObject("ImageMediaMetadata", ImageMediaMetadata);
 }
 
-class videoMediaMetadata file::getVideoMediaMetadata() {
-    return this->getObject<videoMediaMetadata>("videoMediaMetadata");
+class VideoMediaMetadata File::getVideoMediaMetadata() {
+    return this->getObject<VideoMediaMetadata>("VideoMediaMetadata");
 }
 
-void file::setVideoMediaMetadata(class videoMediaMetadata &videoMediaMetadata) {
-    this->setObject("videoMediaMetadata", videoMediaMetadata);
+void File::setVideoMediaMetadata(class VideoMediaMetadata &VideoMediaMetadata) {
+    this->setObject("VideoMediaMetadata", VideoMediaMetadata);
 }
 
-bool file::isIsAppAuthorized() {
+bool File::isIsAppAuthorized() {
     return this->getBool("isAppAuthorized");
 }
 
-void file::setIsAppAuthorized(bool isAppAuthorized) {
+void File::setIsAppAuthorized(bool isAppAuthorized) {
     this->setBool("isAppAuthorized", isAppAuthorized);
 }*/

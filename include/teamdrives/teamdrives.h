@@ -6,20 +6,20 @@
 #define PLEXDRIVE_TEAMDRIVES_H
 
 
-#include <classes/teamDrive.h>
-#include "classes/teamDriveList.h"
+#include <teamdrives/TeamDrive.h>
+#include <teamdrives/TeamDriveList.h>
 
-class teamdrives {
+class Teamdrives {
 public:
-    static teamDrive create(string requestId, teamDrive requestBody,
+    static TeamDrive create(string requestId, TeamDrive requestBody,
                             bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
     static void del(string teamDriveId,
                     bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static teamDrive get(string teamDriveId,
+    static TeamDrive get(string teamDriveId,
                          bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static teamDriveList list(int pageSize = 10, string pageToken = "",
+    static TeamDriveList list(int pageSize = 10, string pageToken = "",
                               bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static teamDrive update(string teamDriveId, teamDrive requestBody,
+    static TeamDrive update(string teamDriveId, TeamDrive requestBody,
                             bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
 };
 

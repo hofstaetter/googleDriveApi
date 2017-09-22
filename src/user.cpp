@@ -2,61 +2,95 @@
 // Created by Matthias Hofstätter on 21.08.17.
 //
 
-#include "classes/user.h"
+#include <global/User.h>
+#include <stringbuffer.h>
+#include <writer.h>
 
-string user::getKind() {
-    return this->getString("kind");
+User::User() {
+
 }
 
-void user::setKind(string &kind) {
-    this->setString("kind", kind);
+User::User(rapidjson::Document &document) {
+    if(document.HasMember("kind"))
+        this->kind = document["kind"].GetString();
+    if(document.HasMember("displayName"))
+        this->displayName = document["displayName"].GetString();
+    if(document.HasMember("photoLink"))
+        this->photoLink = document["photoLink"].GetString();
+    if(document.HasMember("me"))
+        this->me = document["me"].GetBool();
+    if(document.HasMember("permissionId"))
+        this->permissionId = document["permissionId"].GetString();
+    if(document.HasMember("emailAddress"))
+        this->emailAddress = document["emailAddress"].GetString();
 }
 
-string user::getDisplayName() {
-    return this->getString("displayName");
+string &User::getKind() {
+    return kind;
 }
 
-void user::setDisplayName(string &displayName) {
-    this->setString("displayName", displayName);
+void User::setKind(string &kind) {
+    User::kind = kind;
 }
 
-string user::getPhotoLink() {
-    return this->getString("photoLink");
+string &User::getDisplayName() {
+    return displayName;
 }
 
-void user::setPhotoLink(string &photoLink) {
-    this->setString("photoLink", photoLink);
+void User::setDisplayName(string &displayName) {
+    User::displayName = displayName;
 }
 
-bool user::isMe() {
-    return this->getBool("me");
+string &User::getPhotoLink() {
+    return photoLink;
 }
 
-void user::setMe(bool me) {
-    this->setBool("me", me);
+void User::setPhotoLink(string &photoLink) {
+    User::photoLink = photoLink;
 }
 
-string user::getPermissionId() {
-    return this->getString("permissionId");
+bool User::isMe() {
+    return me;
 }
 
-void user::setPermissionId(string &permissionId) {
-    this->setString("permissionId", permissionId);
+void User::setMe(bool me) {
+    User::me = me;
 }
 
-string user::getEmailAddress() {
-    return this->getString("emailAddress");
+string &User::getPermissionId() {
+    return permissionId;
 }
 
-void user::setEmailAddress(string &emailAddress) {
-    this->setString("emailAddress", emailAddress);
+void User::setPermissionId(string &permissionId) {
+    User::permissionId = permissionId;
 }
 
-user::user() {
-    this->document = new rapidjson::Document;
+string &User::getEmailAddress() {
+    return emailAddress;
 }
 
-user::user(rapidjson::Document &document) {
-    this->document = new rapidjson::Document;
-    (*this->document).CopyFrom(document, (*this->document).GetAllocator());
+void User::setEmailAddress(string &emailAddress) {
+    User::emailAddress = emailAddress;
+}
+
+string &User::toString() {
+    rapidjson::StringBuffer buffer;
+    rapidjson::Writer<rapidjson::StringBuffer> writer(buffer);
+    this->toJSON().Accept(writer);
+
+    string result(buffer.GetString());
+    return result;
+}
+
+rapidjson::Document &User::toJSON() {
+    rapidjson::Document d(rapidjson::kObjectType);
+
+    d.AddMember(rapidjson::StringRef("kind"), rapidjson::StringRef(this->kind.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("displayName"), rapidjson::StringRef(this->displayName.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("photoLink"), rapidjson::StringRef(this->photoLink.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("me"), rapidjson::Value(me), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("permissionId"), rapidjson::StringRef(this->permissionId.c_str()), d.GetAllocator());
+    d.AddMember(rapidjson::StringRef("emailAddress"), rapidjson::StringRef(this->emailAddress.c_str()), d.GetAllocator());
+
+    return d;
 }

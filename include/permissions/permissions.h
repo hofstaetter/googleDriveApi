@@ -6,20 +6,20 @@
 #define PLEXDRIVE_PERMISSIONSGOOGLEDRIVEAPI_H
 
 
-#include "classes/permission.h"
-#include "classes/permissionList.h"
+#include "permissions/Permission.h"
+#include "permissions/PermissionList.h"
 
-class permissions {
+class Permissions {
 public:
-    static permission create(string fileId, string emailMessage = "", bool sendNotificationEmail = false, bool suportsTeamDrives = false, bool transferOwnership = false, permission requestBody = {},
+    static Permission create(string fileId, string emailMessage = "", bool sendNotificationEmail = false, bool suportsTeamDrives = false, bool transferOwnership = false, Permission requestBody = {},
                                       bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
     static void del(string fileId, string permissionId, bool supportsTeamDrives = false,
                     bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static permission get(string fileId, string permissionId, bool supportsTeamDrives = false,
+    static Permission get(string fileId, string permissionId, bool supportsTeamDrives = false,
                                    bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static permissionList list(string fileId, int pageSize = 100, string pageToken = "", bool supportsTeamDrives = false,
+    static PermissionList list(string fileId, int pageSize = 100, string pageToken = "", bool supportsTeamDrives = false,
                                         bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static permission update(string fileId, string permissionId, bool removeExpiration = false, bool supportsTeamDrives = false, bool transferOwnership = false,
+    static Permission update(string fileId, string permissionId, bool removeExpiration = false, bool supportsTeamDrives = false, bool transferOwnership = false,
                                       bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
 };
 

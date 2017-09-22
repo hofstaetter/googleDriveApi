@@ -6,16 +6,29 @@
 #define PLEXDRIVE_REVISIONLIST_H
 
 
-#include "revision.h"
+#include <revisions/Revision.h>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-class revisionList {
+class RevisionList {
+private:
     string kind;
     string nextPageToken;
-    vector<revision> revisions;
+    vector<Revision> revisions;
+public:
+    RevisionList();
+    RevisionList(rapidjson::Document &document);
+
+    string &getKind();
+    void setKind(string &kind);
+
+    string &getNextPageToken();
+    void setNextPageToken(string &nextPageToken);
+
+    vector<Revision> &getRevisions();
+    void setRevisions(vector<Revision> &revisions);
 };
 
 

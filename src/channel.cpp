@@ -2,9 +2,11 @@
 // Created by Matthias Hofstätter on 21.08.17.
 //
 
-#include "classes/channel.h"
+#include "channels/Channel.h"
 
-channel::channel(rapidjson::Document& document) {
+Channel::Channel() {}
+
+Channel::Channel(rapidjson::Document& document) {
     if(document.HasMember("kind"))
         this->kind = document["kind"].GetString();
     if(document.HasMember("id"))
@@ -30,90 +32,85 @@ channel::channel(rapidjson::Document& document) {
     }
 }
 
-channel::channel() {}
-
-string channel::toString() {
-
-
-    return std::string();
-}
-
-const string &channel::getKind() const {
+string &Channel::getKind() {
     return kind;
 }
 
-void channel::setKind(const string &kind) {
-    channel::kind = kind;
+void Channel::setKind(string &kind) {
+    Channel::kind = kind;
 }
 
-const string &channel::getId() const {
+string &Channel::getId() {
     return id;
 }
 
-void channel::setId(const string &id) {
-    channel::id = id;
+void Channel::setId(string &id) {
+    Channel::id = id;
 }
 
-const string &channel::getResourceId() const {
+string &Channel::getResourceId() {
     return resourceId;
 }
 
-void channel::setResourceId(const string &resourceId) {
-    channel::resourceId = resourceId;
+void Channel::setResourceId(string &resourceId) {
+    Channel::resourceId = resourceId;
 }
 
-const string &channel::getResourceUri() const {
+string &Channel::getResourceUri() {
     return resourceUri;
 }
 
-void channel::setResourceUri(const string &resourceUri) {
-    channel::resourceUri = resourceUri;
+void Channel::setResourceUri(string &resourceUri) {
+    Channel::resourceUri = resourceUri;
 }
 
-const string &channel::getToken() const {
+string &Channel::getToken() {
     return token;
 }
 
-void channel::setToken(const string &token) {
-    channel::token = token;
+void Channel::setToken(string &token) {
+    Channel::token = token;
 }
 
-long channel::getExpiration() const {
+long Channel::getExpiration() {
     return expiration;
 }
 
-void channel::setExpiration(long expiration) {
-    channel::expiration = expiration;
+void Channel::setExpiration(long expiration) {
+    Channel::expiration = expiration;
 }
 
-const string &channel::getType() const {
+string &Channel::getType() {
     return type;
 }
 
-void channel::setType(const string &type) {
-    channel::type = type;
+void Channel::setType(string &type) {
+    Channel::type = type;
 }
 
-const string &channel::getAddress() const {
+string &Channel::getAddress() {
     return address;
 }
 
-void channel::setAddress(const string &address) {
-    channel::address = address;
+void Channel::setAddress(string &address) {
+    Channel::address = address;
 }
 
-bool channel::isPayload() const {
+bool Channel::isPayload() {
     return payload;
 }
 
-void channel::setPayload(bool payload) {
-    channel::payload = payload;
+void Channel::setPayload(bool payload) {
+    Channel::payload = payload;
 }
 
-const map<string, string> &channel::getParams() const {
+map<string, string> &Channel::getParams() {
     return params;
 }
 
-void channel::setParams(const map<string, string> &params) {
-    channel::params = params;
+void Channel::setParams(map<string, string> &params) {
+    Channel::params = params;
 }
+
+
+

@@ -33,7 +33,7 @@ class Misc : public PerfTest {
 #define UTF8_REJECT 12
 
 static const unsigned char utf8d[] = {
-    // The first part of the table maps bytes to character classes that
+    // The first part of the table maps bytes to character global that
     // to reduce the size of the transition table and create bitmasks.
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,  0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,

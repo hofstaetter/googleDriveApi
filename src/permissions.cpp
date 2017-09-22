@@ -2,36 +2,36 @@
 // Created by Matthias Hofstätter on 15.09.17.
 //
 
-#include "permissions/permissions.h"
+#include "permissions/Permissions.h"
 
-permission permissions::create(string fileId, string emailMessage, bool sendNotificationEmail,
+Permission Permissions::create(string fileId, string emailMessage, bool sendNotificationEmail,
                                                       bool suportsTeamDrives, bool transferOwnership,
-                                                      permission requestBody, bool alt, string fields,
+                                                      Permission requestBody, bool alt, string fields,
                                                       bool prettyPrint, string quotaUser, string userId) {
-    return permission();
+    return Permission();
 }
 
 void
-permissions::del(string fileId, string permissionId, bool supportsTeamDrives, bool alt, string fields,
+Permissions::del(string fileId, string permissionId, bool supportsTeamDrives, bool alt, string fields,
                                bool prettyPrint, string quotaUser, string userId) {
 
 }
 
-permission
-permissions::get(string fileId, string permissionId, bool supportsTeamDrives, bool alt, string fields,
+Permission
+Permissions::get(string fileId, string permissionId, bool supportsTeamDrives, bool alt, string fields,
                                bool prettyPrint, string quotaUser, string userId) {
-    return permission();
+    return Permission();
 }
 
-permissionList
-permissions::list(string fileId, int pageSize, string pageToken, bool supportsTeamDrives, bool alt,
+PermissionList
+Permissions::list(string fileId, int pageSize, string pageToken, bool supportsTeamDrives, bool alt,
                                 string fields, bool prettyPrint, string quotaUser, string userId) {
-    return permissionList();
+    return PermissionList();
 }
 
-permission
-permissions::update(string fileId, string permissionId, bool removeExpiration, bool supportsTeamDrives,
+Permission
+Permissions::update(string fileId, string permissionId, bool removeExpiration, bool supportsTeamDrives,
                                   bool transferOwnership, bool alt, string fields, bool prettyPrint, string quotaUser,
                                   string userId) {
-    return permission();
+    return Permission();
 }

@@ -3,12 +3,10 @@
 //
 
 #include <document.h>
-#include <classes/jsonObject.h>
-#include "classes/imageMediaMetadata.h"
+#include <files/ImageMediaMetadata.h>
 
-imageMediaMetadata::imageMediaMetadata() {
+ImageMediaMetadata::ImageMediaMetadata() {
 }
 
-imageMediaMetadata::imageMediaMetadata(rapidjson::Document &document) {
-    (this->document)->CopyFrom(document, (this->document)->GetAllocator());
+ImageMediaMetadata::ImageMediaMetadata(rapidjson::Document &document) {
 }

@@ -416,7 +416,7 @@ struct IsGenericValueImpl : FalseType {};
 template <typename T> struct IsGenericValueImpl<T, typename Void<typename T::EncodingType>::Type, typename Void<typename T::AllocatorType>::Type>
     : IsBaseOf<GenericValue<typename T::EncodingType, typename T::AllocatorType>, T>::Type {};
 
-// helper to match arbitrary GenericValue instantiations, including derived classes
+// helper to match arbitrary GenericValue instantiations, including derived global
 template <typename T> struct IsGenericValue : IsGenericValueImpl<T>::Type {};
 
 } // namespace internal

@@ -2,90 +2,55 @@
 // Created by Matthias Hofstätter on 14.09.17.
 //
 
-#include "classes/changeList.h"
+#include "changes/ChangeList.h"
 
-/*string changeList::getKind() {
-    return this->getString("kind");
+ChangeList::ChangeList() {
 }
 
-void changeList::setKind(string kind) {
-    this->setString("kind", kind);
-}
-
-string changeList::getNextPageToken() {
-    return this->getString("nextPageToken");
-}
-
-void changeList::setNextPageToken(string nextPageToken) {
-    this->setString("nextPageToken", nextPageToken);
-}
-
-string changeList::getNewStartPageToken() {
-    return this->getString("newStartPageToken");
-}
-
-void changeList::setNewStartPageToken(string newStartPageToken) {
-    this->setString("newStartPageToken", newStartPageToken);
-}
-
-vector<change> changeList::getChanges() {
-    return this->getObjectArray<change>("changes");
-}
-
-void changeList::setChanges(vector<change> changes) {
-    this->setObjectArray("changes", changes);
-}*/
-
-changeList::changeList() {
-    //this->document = new rapidjson::Document;
-}
-
-changeList::changeList(rapidjson::Document &document) {
-    /*this->document = new rapidjson::Document;
-    this->document->CopyFrom(document, (this->document)->GetAllocator());*/
+ChangeList::ChangeList(rapidjson::Document &document) {
     if(document.HasMember("kind"))
         this->kind = document["kind"].GetString();
     if(document.HasMember("nextPageToken"))
         this->nextPageToken = document["nextPageToken"].GetString();
     if(document.HasMember("newStartPageToken"))
         this->newStartPageToken = document["newStartPageToken"].GetString();
-    if(document.HasMember("changes")) {
+    if(document.HasMember("ChangesApi")) {
         rapidjson::Document d(rapidjson::kObjectType);
-        for(auto &c : document["changes"].GetArray()) {
+        for(auto &c : document["ChangesApi"].GetArray()) {
             d.CopyFrom(c, d.GetAllocator());
-            this->changes.push_back(change(d));
+            this->changes.push_back(Change(d));
         }
     }
 }
 
-const string &changeList::getKind() const {
+string &ChangeList::getKind() {
     return kind;
 }
 
-void changeList::setKind(const string &kind) {
-    changeList::kind = kind;
+void ChangeList::setKind(string &kind) {
+    ChangeList::kind = kind;
 }
 
-const string &changeList::getNextPageToken() const {
+string &ChangeList::getNextPageToken() {
     return nextPageToken;
 }
 
-void changeList::setNextPageToken(const string &nextPageToken) {
-    changeList::nextPageToken = nextPageToken;
+void ChangeList::setNextPageToken(string &nextPageToken) {
+    ChangeList::nextPageToken = nextPageToken;
 }
 
-const string &changeList::getNewStartPageToken() const {
+string &ChangeList::getNewStartPageToken() {
     return newStartPageToken;
 }
 
-void changeList::setNewStartPageToken(const string &newStartPageToken) {
-    changeList::newStartPageToken = newStartPageToken;
+void ChangeList::setNewStartPageToken(string &newStartPageToken) {
+    ChangeList::newStartPageToken = newStartPageToken;
 }
 
-const vector<change> &changeList::getChanges() const {
+vector<Change> &ChangeList::getChanges() {
     return changes;
 }
 
-void changeList::setChanges(const vector<change> &changes) {
-    changeList::changes = changes;
+void ChangeList::setChanges(vector<Change> &changes) {
+    ChangeList::changes = changes;
 }

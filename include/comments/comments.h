@@ -7,19 +7,19 @@
 
 
 #include <string>
-#include "classes/comment.h"
-#include "classes/commentList.h"
+#include "Comment.h"
+#include "CommentList.h"
 
-class comments {
-    static comment create(string fileId, comment requestBody = {},
+class Comments {
+    static Comment create(string fileId, Comment requestBody = {},
                                    bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
     static void del(string commentId, string fileId,
                     bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static comment get(string commentId, string fileId, bool includeDeleted = false,
+    static Comment get(string commentId, string fileId, bool includeDeleted = false,
                                 bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static commentList list(string fileId, bool includeDeleted = false, int pageSize = 20, string pageToken = "", string startModifiedTime = "",
+    static CommentList list(string fileId, bool includeDeleted = false, int pageSize = 20, string pageToken = "", string startModifiedTime = "",
                                      bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
-    static comment update(string fileId, string commentId, comment requestBody,
+    static Comment update(string fileId, string commentId, Comment requestBody,
                                    bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
 };
 

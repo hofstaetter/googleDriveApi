@@ -2,69 +2,142 @@
 // Created by Matthias Hofstätter on 14.09.17.
 //
 
-#include "classes/teamDrive.h"
+#include "teamdrives/TeamDrive.h"
 
-teamDrive::teamDrive() {
-    this->document = new rapidjson::Document;
+TeamDrive::TeamDrive() {
 }
 
-string teamDrive::getKind() {
+TeamDrive::TeamDrive(rapidjson::Document &document) {
+    if(document.HasMember("kind"))
+        this->kind = document["kind"].GetString();
+    if(document.HasMember("name"))
+        this->name = document["name"].GetString();
+    if(document.HasMember("themeId"))
+        this->themeId = document["themeId"].GetString();
+    if(document.HasMember("colorRgb"))
+        this->colorRgb = document["colorRgb"].GetString();
+    if(document.HasMember("BackgroundImageFile")) {
+        rapidjson::Document d(rapidjson::kObjectType);
+        d.CopyFrom(document["BackgroundImageFile"], d.GetAllocator());
+        this->backgroundImageFile = BackgroundImageFile::BackgroundImageFile(d);
+    }
+    if(document.HasMember("backgroundImageLink"))
+        this->backgroundImageLink = document["backgroundImageLink"].GetString();
+    if(document.HasMember("Capabilities")) {
+        rapidjson::Document d(rapidjson::kObjectType);
+        d.CopyFrom(document["Capabilities"], d.GetAllocator());
+        this->capabilities = Capabilities(d);
+    }
+}
+
+/*string TeamDrive::getKind() {
     return this->getString("kind");
 }
 
-void teamDrive::setKind(string kind) {
+void TeamDrive::setKind(string kind) {
     this->setString("kind", kind);
 }
 
-string teamDrive::getName() {
+string TeamDrive::getName() {
     return this->getString("name");
 }
 
-void teamDrive::setName(string name) {
+void TeamDrive::setName(string name) {
     this->setString("name", name);
 }
 
-string teamDrive::getThemeId() {
+string TeamDrive::getThemeId() {
     return this->getString("themeId");
 }
 
-void teamDrive::setThemeId(string themeId) {
+void TeamDrive::setThemeId(string themeId) {
     this->setString("themeId", themeId);
 }
 
-string teamDrive::getColorRgb() {
+string TeamDrive::getColorRgb() {
     return this->getString("colorRgb");
 }
 
-void teamDrive::setColorRgb(string colorRgb) {
+void TeamDrive::setColorRgb(string colorRgb) {
     this->setString("colorRgb", colorRgb);
 }
 
-backgroundImageFile teamDrive::getBackgroundImageFile() {
-    return this->getObject<class backgroundImageFile>("backgroundImageFile");
+BackgroundImageFile TeamDrive::getBackgroundImageFile() {
+    return this->getObject<class BackgroundImageFile>("BackgroundImageFile");
 }
 
-void teamDrive::setBackgroundImageFile(backgroundImageFile backgroundImageFile) {
-    this->setObject<class backgroundImageFile>("backgroundImageFile", backgroundImageFile);
+void TeamDrive::setBackgroundImageFile(BackgroundImageFile BackgroundImageFile) {
+    this->setObject<class BackgroundImageFile>("BackgroundImageFile", BackgroundImageFile);
 }
 
-string teamDrive::getBackgroundImageLink() {
+string TeamDrive::getBackgroundImageLink() {
     return this->getString("backgroundImageLink");
 }
 
-void teamDrive::setBackgroundImageLink(string backgroundImageLink) {
+void TeamDrive::setBackgroundImageLink(string backgroundImageLink) {
     this->setString("backgroundImageLink", backgroundImageLink);
 }
 
-capabilities teamDrive::getCapabilities() {
-    return this->getObject<class capabilities>("capabilities");
+Capabilities TeamDrive::getCapabilities() {
+    return this->getObject<class Capabilities>("Capabilities");
 }
 
-void teamDrive::setCapabilities(capabilities capabilities) {
-    this->setObject<class capabilities>("capabilities", capabilities);
+void TeamDrive::setCapabilities(Capabilities Capabilities) {
+}*/
+
+
+string &TeamDrive::getKind() {
+    return kind;
 }
 
-teamDrive::teamDrive(rapidjson::Document &document) : jsonObject(document) {
-    this->document = new rapidjson::Document;
-    this->document->CopyFrom(document, (this->document)->GetAllocator());
+void TeamDrive::setKind(string &kind) {
+    TeamDrive::kind = kind;
+}
+
+string &TeamDrive::getName() {
+    return name;
+}
+
+void TeamDrive::setName(string &name) {
+    TeamDrive::name = name;
+}
+
+string &TeamDrive::getThemeId() {
+    return themeId;
+}
+
+void TeamDrive::setThemeId(string &themeId) {
+    TeamDrive::themeId = themeId;
+}
+
+string &TeamDrive::getColorRgb() {
+    return colorRgb;
+}
+
+void TeamDrive::setColorRgb(string &colorRgb) {
+    TeamDrive::colorRgb = colorRgb;
+}
+
+class BackgroundImageFile &TeamDrive::getBackgroundImageFile() {
+    return backgroundImageFile;
+}
+
+void TeamDrive::setBackgroundImageFile(class BackgroundImageFile &backgroundImageFile) {
+    TeamDrive::backgroundImageFile = backgroundImageFile;
+}
+
+string &TeamDrive::getBackgroundImageLink() {
+    return backgroundImageLink;
+}
+
+void TeamDrive::setBackgroundImageLink(string &backgroundImageLink) {
+    TeamDrive::backgroundImageLink = backgroundImageLink;
+}
+
+class Capabilities &TeamDrive::getCapabilities() {
+    return capabilities;
+}
+
+void TeamDrive::setCapabilities(class Capabilities &capabilities) {
+    TeamDrive::capabilities = capabilities;
 }

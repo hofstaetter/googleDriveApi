@@ -8,9 +8,9 @@
 
 #include <string>
 
-class aboutApi {
+class AboutApi {
 public:
-    static aboutApi get(bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
+    static AboutApi get(bool alt = false, std::string fields = "", bool prettyPrint = false, std::string quotaUser = "", std::string userId = "");
 };
 
 

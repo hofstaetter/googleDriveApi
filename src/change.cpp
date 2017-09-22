@@ -2,15 +2,15 @@
 // Created by Matthias Hofstätter on 14.09.17.
 //
 
-#include "classes/change.h"
-#include "classes/file.h"
-#include "classes/teamDrive.h"
+#include "changes/Change.h"
+#include "files/File.h"
+#include "teamdrives/TeamDrive.h"
 
-change::change() {
+Change::Change() {
     //this->document = new rapidjson::Document;
 }
 
-change::change(rapidjson::Document &document) : jsonObject(document) {
+Change::Change(rapidjson::Document &document) {
     /*this->document = new rapidjson::Document;
     this->document->CopyFrom(document, (this->document)->GetAllocator());*/
     if(document.HasMember("kind"))
@@ -23,145 +23,145 @@ change::change(rapidjson::Document &document) : jsonObject(document) {
         this->removed = document["removed"].GetBool();
     if(document.HasMember("fileId"))
         this->fileId = document["fileId"].GetString();
-    if(document.HasMember("file")) {
+    if(document.HasMember("File")) {
         rapidjson::Document d(rapidjson::kObjectType);
-        d.CopyFrom(document["file"], d.GetAllocator());
-        this->file = file::file(d);
+        d.CopyFrom(document["File"], d.GetAllocator());
+        this->file = File::File(d);
     }
     if(document.HasMember("teamDriveId"))
         this->teamDriveId = document["teamDriveId"].GetString();
-    if(document.HasMember("teamDrive")) {
+    if(document.HasMember("TeamDrive")) {
         rapidjson::Document document(rapidjson::kObjectType);
-        document.CopyFrom(document["teamDrive"], document.GetAllocator());
-        this->teamDrive = teamDrive::teamDrive(document);
+        document.CopyFrom(document["TeamDrive"], document.GetAllocator());
+        this->teamDrive = TeamDrive::TeamDrive(document);
     }
 
 }
 
-string &change::getKind() {
+string &Change::getKind() {
     return kind;
 }
 
-void change::setKind(string &kind) {
+void Change::setKind(string &kind) {
     this->kind = kind;
 }
 
-string &change::getType() {
+string &Change::getType() {
     return type;
 }
 
-void change::setType(string &type) {
+void Change::setType(string &type) {
     this->type = type;
 }
 
-time_t change::getDatetime() {
+time_t Change::getDatetime() {
     return datetime;
 }
 
-void change::setDatetime(time_t datetime) {
+void Change::setDatetime(time_t datetime) {
     this->datetime = datetime;
 }
 
-bool change::isRemoved() {
+bool Change::isRemoved() {
     return removed;
 }
 
-void change::setRemoved(bool removed) {
+void Change::setRemoved(bool removed) {
     this->removed = removed;
 }
 
-string &change::getFileId() {
+string &Change::getFileId() {
     return fileId;
 }
 
-void change::setFileId(string &fileId) {
+void Change::setFileId(string &fileId) {
     this->fileId = fileId;
 }
 
-class file &change::getFile() {
+class File &Change::getFile() {
     return file;
 }
 
-void change::setFile(class file file) {
+void Change::setFile(class File file) {
     this->file = file;
 }
 
-string &change::getTeamDriveId() {
+string &Change::getTeamDriveId() {
     return teamDriveId;
 }
 
-void change::setTeamDriveId(string &teamDriveId) {
+void Change::setTeamDriveId(string &teamDriveId) {
     this->teamDriveId = teamDriveId;
 }
 
-class teamDrive &change::getTeamDrive() {
+class TeamDrive &Change::getTeamDrive() {
     return teamDrive;
 }
 
-void change::setTeamDrive(class teamDrive teamDrive) {
+void Change::setTeamDrive(class TeamDrive teamDrive) {
     this->teamDrive = teamDrive;
 }
 
-/*string change::getKind() {
+/*string Change::getKind() {
     return this->getString("kind");
 }
 
-void change::setKind(string kind) {
+void Change::setKind(string kind) {
     this->setString("kind", kind);
 }
 
-string change::getType() {
+string Change::getType() {
     return this->getString("type");
 }
 
-void change::setType(string type) {
+void Change::setType(string type) {
     this->setString("type", type);
 }
 
-time_t change::getDatetime() {
+time_t Change::getDatetime() {
     return 0; //TODO
 }
 
-void change::setDatetime(time_t datetime) {
+void Change::setDatetime(time_t datetime) {
     //TODO
 }
 
-bool change::isRemoved() {
+bool Change::isRemoved() {
     return this->getBool("removed");
 }
 
-void change::setRemoved(bool removed) {
+void Change::setRemoved(bool removed) {
     this->setBool("removed", removed);
 }
 
-string change::getFileId() {
+string Change::getFileId() {
     return this->getString("fileId");
 }
 
-void change::setFileId(string fileId) {
+void Change::setFileId(string fileId) {
     this->setString("fileId", fileId);
 }
 
-file change::getFile() {
-    return this->getObject<file>("file");
+File Change::getFile() {
+    return this->getObject<File>("File");
 }
 
-void change::setFile(file file) {
-    this->setObject<class file>("file", file);
+void Change::setFile(File File) {
+    this->setObject<class File>("File", File);
 }
 
-string change::getTeamDriveId() {
+string Change::getTeamDriveId() {
     return this->getString("teamDriveId");
 }
 
-void change::setTeamDriveId(string teamDriveId) {
+void Change::setTeamDriveId(string teamDriveId) {
     this->setString("teamDriveId", teamDriveId);
 }
 
-class teamDrive change::getTeamDrive() {
-    return this->getObject<class teamDrive>("teamDrive");
+class TeamDrive Change::getTeamDrive() {
+    return this->getObject<class TeamDrive>("TeamDrive");
 }
 
-void change::setTeamDrive(class teamDrive teamDrive) {
-    this->setObject<class teamDrive>("teamDrive", teamDrive);
+void Change::setTeamDrive(class TeamDrive TeamDrive) {
+    this->setObject<class TeamDrive>("TeamDrive", TeamDrive);
 }*/

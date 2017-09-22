@@ -2,29 +2,31 @@
 // Created by Matthias Hofstätter on 14.09.17.
 //
 
-#include "classes/startPageToken.h"
+#include "changes/StartPageToken.h"
 
-startPageToken::startPageToken() {
-    this->document = new rapidjson::Document;
+StartPageToken::StartPageToken() {
+
 }
 
-startPageToken::startPageToken(rapidjson::Document &document) {
-    this->document = new rapidjson::Document;
-    this->document->CopyFrom(document, (this->document)->GetAllocator());
+StartPageToken::StartPageToken(rapidjson::Document &document) {
+    if(document.HasMember("kind"))
+        this->kind = document["kind"].GetString();
+    if(document.HasMember("startPageToken"))
+        this->startPageToken = document["startPageToken"].GetString();
 }
 
-string startPageToken::getKind() {
-    return this->getString("kind");
+string &StartPageToken::getKind() {
+    return kind;
 }
 
-void startPageToken::setKind(string kind) {
-    this->setString("kind", kind);
+void StartPageToken::setKind(string &kind) {
+    StartPageToken::kind = kind;
 }
 
-string startPageToken::getStartPageToken() {
-    return this->getString("startPageToken");
+string &StartPageToken::getStartPageToken() {
+    return startPageToken;
 }
 
-void startPageToken::setStartPageToken(string startPageToken) {
-    this->setString("startPageToken", startPageToken);
+void StartPageToken::setStartPageToken(string &startPageToken) {
+    StartPageToken::startPageToken = startPageToken;
 }

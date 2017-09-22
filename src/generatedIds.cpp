@@ -2,13 +2,13 @@
 // Created by Matthias Hofstätter on 21.08.17.
 //
 
-#include "classes/generatedIds.h"
+#include "files/GeneratedIds.h"
 
-generatedIds::generatedIds() {
+GeneratedIds::GeneratedIds() {
 
 }
 
-generatedIds::generatedIds(rapidjson::Document &document) {
+GeneratedIds::GeneratedIds(rapidjson::Document &document) {
     if(document.HasMember("kind"))
         this->kind = document["kind"].GetString();
     if(document.HasMember("space"))
@@ -17,4 +17,28 @@ generatedIds::generatedIds(rapidjson::Document &document) {
         for(auto& v : document["ids"].GetArray()) {
             this->ids.push_back(v.GetString());
         }
+}
+
+string &GeneratedIds::getKind() {
+    return kind;
+}
+
+void GeneratedIds::setKind(string &kind) {
+    GeneratedIds::kind = kind;
+}
+
+string &GeneratedIds::getSpace() {
+    return space;
+}
+
+void GeneratedIds::setSpace(string &space) {
+    GeneratedIds::space = space;
+}
+
+vector<string> &GeneratedIds::getIds() {
+    return ids;
+}
+
+void GeneratedIds::setIds(vector<string> &ids) {
+    GeneratedIds::ids = ids;
 }
