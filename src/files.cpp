@@ -21,7 +21,7 @@ Files::list(string corpora, string corpus, bool includeTeamDriveItems, string or
                                         make_pair("teamDriveId", teamDriveId),
                                         make_pair("alt", alt),*/ make_pair("fields", fields), /*make_pair("prettyPrint", prettyPrint ? "true" : "false"), make_pair("quotaUser", quotaUser), make_pair("userId", userId)*/ };
     map<string, string> headers = { make_pair("Authorization", string("Bearer ").append(GoogleOAuth::getAccessToken())) };
-    long responseCode = ApiClient::request("https://www.googleapis.com", "/drive/v3/files", "GET", querystring,
+    long responseCode = API::request("https://www.googleapis.com", "/drive/v3/files", "GET", querystring,
                                                 headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode != 200) { throw -1; }
@@ -49,7 +49,7 @@ Files::copy(string fileId, bool ignoreDefaultVisibility, bool keepRevisionForeve
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId).append("/copy"), "POST", {}, {}, {}, requestBody.toString(), responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId).append("/copy"), "POST", {}, {}, {}, requestBody.toString(), responseHeaders, responseBody);
 
     if(responseCode != 200) throw -1;
 
@@ -83,7 +83,7 @@ Files::create(string uploadType, bool ignoreDefaultVisibility, bool keepRevision
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", "/drive/v3/files/", "POST", querystring, headers, {}, requestBody.toString(), responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", "/drive/v3/files/", "POST", querystring, headers, {}, requestBody.toString(), responseHeaders, responseBody);
 
     if(responseCode != 200) throw -1;
 
@@ -112,7 +112,7 @@ Files::del(string fileId, bool supportsTeamDrives,
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "DELETE", querystring, headers, {}, "", responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "DELETE", querystring, headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode != 204) return false;
     return true;
@@ -129,7 +129,7 @@ bool Files::emptyTrash(string alt, string fields, bool prettyPrint, string quota
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", "/drive/v3/files/trash", "DELETE", querystring, headers, {}, "", responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", "/drive/v3/files/trash", "DELETE", querystring, headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode == 204) return true;
     return false;
@@ -149,7 +149,7 @@ Files::exp(string fileId, string mimeType,
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId).append("/export"), "GET", querystring, {}, {}, "", responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId).append("/export"), "GET", querystring, {}, {}, "", responseHeaders, responseBody);
 
     if(responseCode == 200) throw -1;
 
@@ -176,7 +176,7 @@ Files::generateIds(int count, string space, string alt, string fields, bool pret
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", "/drive/v3/files/generateIds", "GET", querystring, headers, {}, "", responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", "/drive/v3/files/generateIds", "GET", querystring, headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode != 200) {
         throw -1;
@@ -212,7 +212,7 @@ Files::get(string fileId, bool acknowledgeAbuse, bool supportsTeamDrives, string
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, "", responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode != 200) {
         throw -1;
@@ -243,7 +243,7 @@ File Files::update(string fileId, string uploadType,  string addParents, bool ke
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, "", responseHeaders, responseBody);
+    long responseCode = API::request("https://www.googleapis.com", string("/drive/v3/files/").append(fileId), "GET", querystring, headers, {}, "", responseHeaders, responseBody);
 
     if(responseCode != 200) {
         throw -1;
@@ -276,7 +276,7 @@ Files::watch(string fileId, bool acknowledgeAbuse, bool supportsTeamDrives, Chan
     string responseBody;
     string responseHeaders;
 
-    long responseCode = ApiClient::request("ApiClient://www.googleapis.com", string("/drive/v3/Files/").append(fileId), "GET", querystring, headers, {}, requestBody.toString(), responseHeaders, responseBody);
+    long responseCode = API::request("API://www.googleapis.com", string("/drive/v3/Files/").append(fileId), "GET", querystring, headers, {}, requestBody.toString(), responseHeaders, responseBody);
 
     if(responseCode != 200) throw -1;
 

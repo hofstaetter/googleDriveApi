@@ -9,7 +9,7 @@
 #include <rapidjson.h>
 #include <document.h>
 #include <files/Files.h>
-#include <global/ApiClient.h>
+#include <global/API.h>
 
 using namespace std;
 

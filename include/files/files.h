@@ -18,7 +18,7 @@
 #include <vector>
 #include <iostream>
 #include "Files.h"
-#include "global/ApiClient.h"
+#include "global/API.h"
 #include "oauth/GoogleOAuth.h"
 #include "channels/Channel.h"
 
