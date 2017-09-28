@@ -14,9 +14,9 @@ ChangeList::ChangeList(rapidjson::Document &document) {
         this->nextPageToken = document["nextPageToken"].GetString();
     if(document.HasMember("newStartPageToken"))
         this->newStartPageToken = document["newStartPageToken"].GetString();
-    if(document.HasMember("ChangesApi")) {
+    if(document.HasMember("changes")) {
         rapidjson::Document d(rapidjson::kObjectType);
-        for(auto &c : document["ChangesApi"].GetArray()) {
+        for(auto &c : document["changes"].GetArray()) {
             d.CopyFrom(c, d.GetAllocator());
             this->changes.push_back(Change(d));
         }

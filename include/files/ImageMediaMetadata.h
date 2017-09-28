@@ -6,7 +6,7 @@
 #define PLEXDRIVE_IMAGEMEDIAMETADATA_H
 
 
-#include "global/Location.h"
+#include "Location.h"
 #include "document.h"
 #include <string>
 

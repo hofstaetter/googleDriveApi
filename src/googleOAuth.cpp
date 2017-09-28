@@ -11,7 +11,7 @@ string GoogleOAuth::clientId;
 string GoogleOAuth::clientSecret;
 string GoogleOAuth::authorizationCode;
 string GoogleOAuth::refreshToken;
-string GoogleOAuth::accessToken;
+string GoogleOAuth::accessToken = "";
 time_t GoogleOAuth::expire;
 
 void GoogleOAuth::requestAuthorizationCode(string clientId, string redirectUri, string responseType, string scope, string state, string includeGrantedScopes,
@@ -146,7 +146,7 @@ void GoogleOAuth::authenticate() {
 
 bool GoogleOAuth::isAuthenticated() {
     if(!GoogleOAuth::accessToken.empty() && GoogleOAuth::expire > time(NULL)) {
-        string responseHeaders;
+        /*string responseHeaders;
         string responseBody;
 
         long httpcode = API::request("https://www.googleapis.com", "/oauth2/v3/tokeninfo", "POST", { },
@@ -162,7 +162,7 @@ bool GoogleOAuth::isAuthenticated() {
 
         if(responseJson.IsObject() && responseJson.HasMember("azp") && responseJson.HasMember("expires_in")) {
             if(responseJson["azp"].GetString() != GoogleOAuth::clientId || atoi(responseJson["expires_in"].GetString()) <= 0) return false;
-        } else { throw responseJson; }
+        } else { throw responseJson; }*/
 
         return true;
     }

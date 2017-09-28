@@ -8,7 +8,7 @@
 
 #include <ctime>
 #include <string>
-#include "global/User.h"
+#include "User.h"
 
 using namespace std;
 

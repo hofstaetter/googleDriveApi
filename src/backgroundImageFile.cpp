@@ -2,7 +2,7 @@
 // Created by Matthias Hofstätter on 17.09.17.
 //
 
-#include <global/BackgroundImageFile.h>
+#include <teamdrives/BackgroundImageFile.h>
 
 BackgroundImageFile::BackgroundImageFile() {
 }

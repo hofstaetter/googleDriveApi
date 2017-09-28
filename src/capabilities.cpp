@@ -2,7 +2,7 @@
 // Created by Matthias Hofstätter on 17.09.17.
 //
 
-#include <global/Capabilities.h>
+#include <Capabilities.h>
 
 Capabilities::Capabilities() {
 }

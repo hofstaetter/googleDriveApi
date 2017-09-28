@@ -3,7 +3,7 @@
 //
 
 #include <document.h>
-#include "global/Location.h"
+#include "files/Location.h"
 
 Location::Location() {
 

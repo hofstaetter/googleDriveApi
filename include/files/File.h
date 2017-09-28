@@ -6,10 +6,10 @@
 #define GOOGLEDRIVEAPI_FILESRESOURCE_H
 
 #include "files/Files.h"
-#include "global/User.h"
+#include "User.h"
 #include "files/ImageMediaMetadata.h"
 #include "files/VideoMediaMetadata.h"
-#include "global/Capabilities.h"
+#include "Capabilities.h"
 #include "permissions/Permission.h"
 #include "rapidjson.h"
 #include "document.h"

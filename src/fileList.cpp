@@ -15,8 +15,8 @@ FileList::FileList(rapidjson::Document &document) {
         this->nextPageToken = document["nextPageToken"].GetString();
     if(document.HasMember("incompleteSearch"))
         this->incompleteSearch = document["incompleteSearch"].GetBool();
-    if(document.HasMember("Files")) {
-        for(rapidjson::Value::ConstMemberIterator itr = document["Files"].MemberBegin(); itr == document["Files"].MemberEnd(); itr++) {
+    if(document.HasMember("files")) {
+        for(rapidjson::Value::ConstMemberIterator itr = document["files"].MemberBegin(); itr == document["files"].MemberEnd(); itr++) {
             rapidjson::Document d;
             d.CopyFrom(itr->value, d.GetAllocator());
             this->files.emplace_back(File(d));

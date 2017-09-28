@@ -2,7 +2,7 @@
 // Created by Matthias Hofstätter on 21.08.17.
 //
 
-#include <global/User.h>
+#include <User.h>
 #include <stringbuffer.h>
 #include <writer.h>
 

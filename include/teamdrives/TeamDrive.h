@@ -6,8 +6,8 @@
 #define PLEXDRIVE_TEAMDRIVESRESOURCE_H
 
 #include <string>
-#include <global/BackgroundImageFile.h>
-#include <global/Capabilities.h>
+#include <teamdrives/BackgroundImageFile.h>
+#include <Capabilities.h>
 
 using namespace std;
 

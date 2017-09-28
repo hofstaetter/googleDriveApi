@@ -7,7 +7,7 @@
 
 
 #include <ctime>
-#include <global/User.h>
+#include <User.h>
 
 class Revision {
 private:

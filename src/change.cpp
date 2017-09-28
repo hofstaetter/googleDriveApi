@@ -23,16 +23,16 @@ Change::Change(rapidjson::Document &document) {
         this->removed = document["removed"].GetBool();
     if(document.HasMember("fileId"))
         this->fileId = document["fileId"].GetString();
-    if(document.HasMember("File")) {
+    if(document.HasMember("file")) {
         rapidjson::Document d(rapidjson::kObjectType);
-        d.CopyFrom(document["File"], d.GetAllocator());
+        d.CopyFrom(document["file"], d.GetAllocator());
         this->file = File::File(d);
     }
     if(document.HasMember("teamDriveId"))
         this->teamDriveId = document["teamDriveId"].GetString();
-    if(document.HasMember("TeamDrive")) {
+    if(document.HasMember("teamDrive")) {
         rapidjson::Document document(rapidjson::kObjectType);
-        document.CopyFrom(document["TeamDrive"], document.GetAllocator());
+        document.CopyFrom(document["teamDrive"], document.GetAllocator());
         this->teamDrive = TeamDrive::TeamDrive(document);
     }
 

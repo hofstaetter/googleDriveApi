@@ -3,7 +3,7 @@
 //
 
 #include <iostream>
-#include "global/API.h"
+#include "API.h"
 
 using namespace std;
 
@@ -74,7 +74,7 @@ int my_trace(CURL *handle, curl_infotype type,
             break;
     }
 
-    //dump(text, stderr, (unsigned char *)data, size);
+    dump(text, stderr, (unsigned char *)data, size);
     return 0;
 }
 
@@ -107,9 +107,7 @@ API::request(string host, string path, string type, map<string, string> querystr
     //curl_version_info_data *d = curl_version_info(CURLVERSION_NOW);
 
     //debug
-    //curl_easy_setopt(req, CURLOPT_VERBOSE, 1L);
-
-    //curl_easy_setopt(req, CURLOPT_FOLLOWLOCATION, 1L);
+    curl_easy_setopt(req, CURLOPT_VERBOSE, 1L);
 
     //build & set url
     string url;
@@ -117,7 +115,7 @@ API::request(string host, string path, string type, map<string, string> querystr
 
     url.append(host); //url static
     url.append(path);
-    for(auto p : querystring) {
+    for(auto &p : querystring) {
         if(p.second.compare("") == 0) continue;
         if(first) {
             url.append("?");
@@ -128,15 +126,14 @@ API::request(string host, string path, string type, map<string, string> querystr
     }
     curl_easy_setopt(req, CURLOPT_URL, url.c_str());
 
-    //set HTTP 1.1
-    //curl_easy_setopt(req, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
     //curl_easy_setopt(req, CURLOPT_SSL_VERIFYHOST, 0L);
 
+    long contentlength = 0;
+
     //set postfields
-    string pf;
-    first = true;
+    string pf = "";
     if(type.compare("POST") == 0) {
+        first = true;
         for(auto p : postfields) {
             if(!first) {
                 pf.append("&");
@@ -148,6 +145,7 @@ API::request(string host, string path, string type, map<string, string> querystr
         }
         curl_easy_setopt(req, CURLOPT_POSTFIELDS, pf.c_str());
         curl_easy_setopt(req, CURLOPT_POSTFIELDSIZE, pf.length());
+        contentlength += pf.length();
     }
 
     //write response to buffer
@@ -158,7 +156,7 @@ API::request(string host, string path, string type, map<string, string> querystr
     struct curl_slist *headers=NULL;
     headers = curl_slist_append(headers, ("Host: " + host.substr(host.find("://", 0) + 3, host.length() - host.find("://", 0))).c_str());
 
-    long contentlength = pf.length() + body.length();
+    contentlength += body.length();
     headers = curl_slist_append(headers, ("Content-length: " + to_string(contentlength)).c_str());
     headers = curl_slist_append(headers, "Connection: close");
     for(auto p : header) {
@@ -168,7 +166,7 @@ API::request(string host, string path, string type, map<string, string> querystr
 
     //chrono::high_resolution_clock::time_point t2 = chrono::high_resolution_clock::now();
     chrono::milliseconds ms =chrono::duration_cast< chrono::milliseconds >(chrono::system_clock::now().time_since_epoch());
-    cout << ms.count() << "[REQUEST]"  << type << " " << url << endl << pf << endl;
+    cout << ms.count() << " [REQUEST] "  << type << " " << url << endl << pf << endl << body << endl;
 
     CURLcode result = curl_easy_perform(req);
 
@@ -182,7 +180,7 @@ API::request(string host, string path, string type, map<string, string> querystr
         responseBody = bodyBuffer;
 
         responseHeaders = headerBuffer;
-        cout << ms.count() << "[RESPONSE]"  << type << " " << host << path << endl;
+        cout << ms.count() << " [RESPONSE] "  << type << " " << host << path << endl << responseBody << endl;
     } else {
         fprintf(stderr, "curl_easy_perform() failed: %s\n", curl_easy_strerror(result));
     }

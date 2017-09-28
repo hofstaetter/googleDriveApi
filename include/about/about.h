@@ -6,7 +6,7 @@
 #define PLEXDRIVE_ABOUT_H
 
 
-#include <global/User.h>
+#include <User.h>
 #include "StorageQuota.h"
 #include <map>
 #include <vector>
